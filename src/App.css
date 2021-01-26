@@ -1,0 +1,9 @@
+.app {
+  /* height: 100vh; */
+  display:flex;
+  background-color: #1A2035;
+
+  /* flex:1; */
+  /* align-items: normal; */
+  /* justify-content: space-between; */
+}

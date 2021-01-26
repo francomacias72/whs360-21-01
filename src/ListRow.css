@@ -1,0 +1,22 @@
+.listRow {
+    display:flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #343c42;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+
+.listRowId {
+    padding-left: 10px;
+}
+
+.listRowDescription {
+    padding-right: 10px;
+}
+
+.listRowIconsColor {
+    color: #6c757d !important;
+}
