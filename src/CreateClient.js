@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { useState } from 'react';
 import './CreateClient.css'
 import CloseIcon from '@material-ui/icons/Close';
 import { Button } from '@material-ui/core'
@@ -11,20 +12,39 @@ import firebase from 'firebase'
 function CreateClient() {
     const editMode = useSelector(selectEditMode)
     const selectedClient = useSelector(selectOpenClient)
+    const [clientName, setClientName] = useState('');
+    // const [dir1, setDir1] = useState('');
+    // const [dir2, setDir2] = useState('');
+    // const [dir3, setDir3] = useState('');
+    // const [rcf, setRfc] = useState('');
+
+
 
     const { register, handleSubmit, watch, errors } = useForm();
 
     const onSubmit = (formData) => {
         console.log(formData)
-        db.collection('clients').add({
-            clientName: formData.clientName,
-            dir1: formData.dir1,
-            dir2: formData.dir2,
-            dir3: formData.dir3,
-            rfc: formData.rfc,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        })
 
+        if (editMode) {
+            db.collection('clients').selectedClient.Id.set({
+                clientName: formData.clientName,
+                dir1: formData.dir1,
+                dir2: formData.dir2,
+                dir3: formData.dir3,
+                rfc: formData.rfc,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+        }
+        else {
+            db.collection('clients').add({
+                clientName: formData.clientName,
+                dir1: formData.dir1,
+                dir2: formData.dir2,
+                dir3: formData.dir3,
+                rfc: formData.rfc,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+        }
         dispatch(closeCreateClient())
     }
 
@@ -52,10 +72,12 @@ function CreateClient() {
                 name='clientName'
                 // placeholder="Name"
                 type="text"
-                value={editMode ? selectedClient?.Name : null}
+                // value={editMode ? selectedClient?.Name : null}
+                value={clientName}
+                onChange={(e) => setClientName(e.target.value)}
                 ref={register({ required: true })}
             />
-            {errors.clientName && <p className="createClient__error"> Client Name is Required!!!</p>}
+            {errors.clientName && <p className="createClient__error">Campo Requerido...</p>}
 
             <div className="fieldHeader">
                 <p>Address Line 1:</p>
@@ -67,7 +89,7 @@ function CreateClient() {
                 type="text"
                 ref={register({ required: true })}
             />
-            {errors.dir1 && <p className="createClient__error">Address Line 1 is Required!!!</p>}
+            {errors.dir1 && <p className="createClient__error">Campo Requerido...</p>}
 
             <div className="fieldHeader">
                 <p>Address Line 2:</p>
@@ -101,7 +123,7 @@ function CreateClient() {
                 type="text"
                 ref={register({ required: true })}
             />
-            {errors.rfc && <p className="createClient__error">RFC is Required!!!</p>}
+            {errors.rfc && <p className="createClient__error">Campo Requerido...</p>}
 
             <div className="createClient__options">
                 <Button

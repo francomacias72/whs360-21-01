@@ -63,12 +63,9 @@ function Client({ header }) {
                         >
                         </input>
                     </div>
-                    <IconButton
-                        onClick={addClient}
-                        className="editIcon"
-                    >
-                        <AddCircleIcon className="clientDetailsEditIcon secondary" />
-                    </IconButton>
+
+                    <AddCircleIcon onClick={addClient} className="addClientIcon" />
+
                 </div>
                 <div className="clientListRows">
                     {clients.filter(c => c.data.clientName.includes(filter)).map(({ id, data: { clientName, dir1, dir2, dir3, rfc, timestamp }
@@ -95,7 +92,7 @@ function Client({ header }) {
                     <IconButton className="secondary">
                         <div className="editIcon" >
                             <EditIcon
-                                className="clientDetailsEditIcon secondary"
+                                className="clientDetailsEditIcon"
                                 onClick={() => editClient(selectedClient?.Id)}
                             // onClick={() => dispatch(changeToEdit())}
                             />

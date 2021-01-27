@@ -1,8 +1,8 @@
 .sidebar {
-    color:white;
+    color:yellow;
     background-color: #202940;
     height: 100vh;
-    width: 25vh;
+    max-width: 250px;
 }
 
 .sidebar__top {

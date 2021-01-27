@@ -8,6 +8,8 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import StoreIcon from '@material-ui/icons/Store';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import ImportExportIcon from '@material-ui/icons/ImportExport';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 
 function Sidebar() {
@@ -24,6 +26,8 @@ function Sidebar() {
                 <SidebarOption Icon={AccountTreeIcon} title="Inventarios" number={2} color={"#6c757d"} />
                 <SidebarOption Icon={ReceiptIcon} title="Recibos" number={25} color={"#17a2b8"} />
                 <SidebarOption Icon={LocalShippingIcon} title="Embarques" number={2} color={"#e83e8c"} />
+                <SidebarOption Icon={ImportExportIcon} title="Importaciones" number={2} color={"yellowgreen"} />
+                <SidebarOption Icon={AssessmentIcon} title="Reportes" number={2} color={"#007bff"} />
             </div>
         </div>
     )

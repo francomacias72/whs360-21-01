@@ -2,14 +2,17 @@
     display: flex;
     justify-content: space-between;
     overflow: auto; 
-    max-height: 90vh; 
+    /* max-height: 90vh;  */
     /* background-color:  #67686b; */
 }
 
-.clientAddIcon {
-    /* color:white;
-    background-color: red;
-    padding: 2px; */
+.addClientIcon {
+    color:white;
+    background-color: #4caf50;
+    border-radius: 15%;
+    padding: 10px;
+    width:  180px;
+    cursor: pointer;
 }
 
 .clientList, .clientDetails {
@@ -21,8 +24,9 @@
     background-color: #202940;
     color: #8B928E;
     width: 40vw;
-    max-height: 100vh;
-    overflow: auto; 
+    max-height: 77vh;
+    overflow: auto;
+    min-width: 354px;
 }
 
 .clientList::-webkit-scrollbar, .clientDetails::-webkit-scrollbar {
