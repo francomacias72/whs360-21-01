@@ -1,11 +1,10 @@
 .createClient {
     position: absolute;
-    bottom: 20px;
-    right: 50px;
-    background-color: #404040;
-    width: 40%;
-    height: 40%;
-    max-width: 500px;
+    top: 10vh;
+    right: 38vw;
+    background-color: #081229;
+    /* width: 20%; */
+    /* height: 40%; */
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     display: flex;
@@ -16,20 +15,24 @@
 
 
 .createClient__header {
-    padding: 13px;
+    /* padding-top: 10px;  */
     display: flex;
-    justify-content: space-between    ;
+    justify-content: space-between;
     align-items: center;
     color: grey;
+    border-bottom: 1px solid #516391;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .createClient__header > h3 {
     color: whitesmoke;
-    font-size: 13px;    
+    font-size: 25px;    
+    margin: 10px 15px 15px 15px;
 }
 
 .createClient__send {
-    background-color: #3079ed !important;
+    background-color: #ff7aa8 !important;
     text-transform: capitalize !important;
     margin: 15px !important;
 }
@@ -44,12 +47,14 @@
     flex-direction: column;
 }
 
-.createClient > form > input{
+.createClient2 > form > input{
     height: 30px;   
     padding: 10px;
     border: none;
     border-bottom: 1px solid whitesmoke;
     outline: none;
+    background-color: #081229;
+    border-radius: 50%;
 }
 
 .createClient__message {
@@ -57,7 +62,7 @@
 }
 
 .createClient__error{
-    background-color: pink;
+    background-color: #ff7aa8;
     color:red;
     text-align: right;
     margin:0;
@@ -65,3 +70,29 @@
     font-size: smaller;
 }
 
+.fieldHeader > p {
+    color:white;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+
+
+form>input {
+    margin: 0px 20px 0px 20px;
+    font-size: 15px;
+}
+
+form>input:hover {
+    border: 2px solid #ff7aa8;
+}
+
+.createClient__options {
+    display:flex;
+    justify-content: center;
+    /* width: auto; */
+}
+
+.MuiButton-containedPrimary {
+    flex: .6;
+}

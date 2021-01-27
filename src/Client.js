@@ -7,7 +7,7 @@ import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import { useDispatch, useSelector } from 'react-redux'
-import { openCreateClient, selectOpenClient } from './features/clientSlice'
+import { openCreateClient, selectOpenClient, changeToEdit, changeToAdd } from './features/clientSlice'
 import { db } from './firebase';
 
 
@@ -37,6 +37,16 @@ function Client({ header }) {
     }
     // clients.filter(c => c.data.rfc.includes('E'))
     // console.log(clients.filter(c => c.data.rfc.includes('E')))
+    function editClient(client) {
+        if (selectedClient?.Id) {
+            dispatch(changeToEdit())
+            dispatch(openCreateClient())
+        }
+    }
+    function addClient() {
+        dispatch(openCreateClient())
+        dispatch(changeToAdd())
+    }
 
     return (
         <div className="client">
@@ -46,15 +56,18 @@ function Client({ header }) {
                         <PersonIcon />
                     </div>
                     <p>Clientes</p>
-                    <input
-                        placeholder='Search Client'
-                        onChange={filterChange}
-                    >
-                    </input>
+                    <div className="headerSearch">
+                        <input
+                            placeholder='Buscar...'
+                            onChange={filterChange}
+                        >
+                        </input>
+                    </div>
                     <IconButton
-                        onClick={() => dispatch(openCreateClient())}
+                        onClick={addClient}
+                        className="editIcon"
                     >
-                        <AddCircleIcon className="clientAddIcon" />
+                        <AddCircleIcon className="clientDetailsEditIcon secondary" />
                     </IconButton>
                 </div>
                 <div className="clientListRows">
@@ -80,9 +93,13 @@ function Client({ header }) {
                     </div>
                     <p>Detalles</p>
                     <IconButton className="secondary">
-                    <div className="editIcon" >
-                        <EditIcon className="clientDetailsEditIcon secondary" />
-                    </div>
+                        <div className="editIcon" >
+                            <EditIcon
+                                className="clientDetailsEditIcon secondary"
+                                onClick={() => editClient(selectedClient?.Id)}
+                            // onClick={() => dispatch(changeToEdit())}
+                            />
+                        </div>
                     </IconButton>
                 </div>
                 <div className="clientDetailsFields">

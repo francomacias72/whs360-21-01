@@ -5,10 +5,17 @@ export const clientSlice = createSlice({
     initialState: {
         selectedClient: null,
         createClientIsOpen: false,
+        editMode: false,
     },
     reducers: {
         selectClient: (state, action) => {
             state.selectedClient = action.payload
+        },
+        changeToEdit: (state) => {
+            state.editMode = true;
+        },
+        changeToAdd: (state) => {
+            state.editMode = false;
         },
         openCreateClient: (state) => {
             state.createClientIsOpen = true;
@@ -21,11 +28,14 @@ export const clientSlice = createSlice({
 
 export const {
     selectClient,
+    changeToEdit,
+    changeToAdd,
     openCreateClient,
     closeCreateClient,
 } = clientSlice.actions;
 
 export const selectOpenClient = (state) => state.client.selectedClient
+export const selectEditMode = state => state.client.editMode
 export const selectCreateClientIsOpen = (state) => state.client.createClientIsOpen
 
 export default clientSlice.reducer;

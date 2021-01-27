@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom"
 import { selectClient } from './features/clientSlice';
 import { useDispatch } from 'react-redux'
 import { db } from './firebase';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 
 function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
@@ -27,25 +28,24 @@ function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
         );
         // history.push("/mail")
         // console.log (Id, Name, dir1, dir2, dir3, rfc)
-           
+
     }
 
     function deleteClient() {
-        if (window.confirm("¿Está seguro que quiere borrar Cliente?"))
-        {
-            db.collection("clients").doc(Id).delete().then(function() {
+        if (window.confirm("¿Está seguro que quiere borrar Cliente?")) {
+            db.collection("clients").doc(Id).delete().then(function () {
                 console.log("Document successfully deleted!");
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.error("Error removing document: ", error);
             });
             dispatch(
                 selectClient({
-                    Id:null,
-                    Name:null,
-                    dir1:null,
-                    dir2:null,
-                    dir3:null,
-                    rfc:null,
+                    Id: null,
+                    Name: null,
+                    dir1: null,
+                    dir2: null,
+                    dir3: null,
+                    rfc: null,
                 })
             );
         }
@@ -56,7 +56,7 @@ function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
             <div className="clientRowIcons">
                 <IconButton className="clientRowIconsColor">
                     <div onClick={openClient} className="editIcon">
-                        <DetailsIcon className="clientRowEditIcon" />
+                        <ListAltIcon className="clientRowEditIcon" />
                     </div>
                 </IconButton>
                 <IconButton className="clientRowIconsColor">
@@ -67,7 +67,7 @@ function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
 
             </div>
             {/* <div className="clientRowId">{Id}</div> */}
-            <div  className="clientRowName">{Name}</div>
+            <div className="clientRowName">{Name}</div>
             {/* <div className="clientRowDescription">{Description}</div> */}
         </div>
     )

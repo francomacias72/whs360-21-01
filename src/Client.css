@@ -7,9 +7,9 @@
 }
 
 .clientAddIcon {
-    color:white;
+    /* color:white;
     background-color: red;
-    padding: 2px;
+    padding: 2px; */
 }
 
 .clientList, .clientDetails {
@@ -32,6 +32,7 @@
 .clientHeader, .clientDetailsHeader {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     margin-left: 15px;
@@ -43,7 +44,7 @@
     border-bottom: 1px solid #343c42;
     background-color:  #202940;
     /* flex:1; */
-    z-index: 999;
+    /* z-index: 999; */
 
 }
 
@@ -57,7 +58,7 @@
 
 }
 
-.clientHeaderIcon, .clientDetailsHeaderIcon {
+.clientHeaderIcon, .clientDetailsHeaderIcon, .clientAddIcon {
     /* position:relative; */
     position:sticky;
     height: 35px;
@@ -81,7 +82,7 @@
     color: #fff;
     background-color: rgba(0,0,0,.03);
     border-bottom: 1px solid rgba(0,0,0,.125);
-    z-index: 999;
+    /* z-index: 999; */
 
 }
 

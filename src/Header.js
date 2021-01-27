@@ -15,7 +15,7 @@ function Header() {
                 <h1>Sustaita Forwarding L.L.C.</h1>
             </div>
             <div className="headerSearch">
-                <input type="text" placeholder="Search..." />
+                <input type="text" placeholder="Buscar..." />
             </div>
             <div className="headerRight">
                 <IconButton>

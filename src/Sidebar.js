@@ -20,10 +20,10 @@ function Sidebar() {
             <div className="sidebarOptions">
                 <SidebarOption Icon={PersonIcon} title="Clientes" number={5} color={"#A53AB7"} />
                 <SidebarOption Icon={ViewHeadlineIcon} title="Partes" number={4} color={"#4caf50"} />
-                <SidebarOption Icon={StoreIcon} title="Bodegas" number={2} color={"#fd7e14"} />
-                <SidebarOption Icon={AccountTreeIcon} title="Zonas" number={2} color={"#6c757d"} />
+                <SidebarOption Icon={StoreIcon} title="Bodegas/Locaciones" number={2} color={"#fd7e14"} />
+                <SidebarOption Icon={AccountTreeIcon} title="Inventarios" number={2} color={"#6c757d"} />
                 <SidebarOption Icon={ReceiptIcon} title="Recibos" number={25} color={"#17a2b8"} />
-                <SidebarOption Icon={LocalShippingIcon} title="Envíos" number={2} color={"#e83e8c"} />
+                <SidebarOption Icon={LocalShippingIcon} title="Embarques" number={2} color={"#e83e8c"} />
             </div>
         </div>
     )
