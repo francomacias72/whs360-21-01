@@ -1,0 +1,120 @@
+.part {
+    display: flex;
+    justify-content: space-between;
+    overflow: auto; 
+    padding: 0;
+    /* max-height: 90vh;  */
+    /* background-color:  #67686b; */
+}
+
+.addPartIcon {
+    color:white;
+    background-color: #4caf50;
+    border-radius: 15%;
+    padding: 10px;
+    width:  180px;
+    cursor: pointer;
+}
+
+.partList, .partDetails {
+    border-bottom: 2px solid #111624;
+    border-right: 2px solid #111624;
+    margin: 20px;
+    margin-top: 60px;
+    /* padding: 10px; */
+    background-color: #202940;
+    color: #8B928E;
+    width: 40vw;
+    max-height: 77vh;
+    overflow: auto;
+    min-width: 354px;
+    /* z-index: 999; */
+
+}
+
+.partList::-webkit-scrollbar, .partDetails::-webkit-scrollbar {
+    display:none;
+}
+
+.partHeader, .partDetailsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+    /* padding-bottom: 10px; */
+    margin-bottom: 10px;
+    font-size: 20px;
+    color:white;
+    text-transform: uppercase;
+    border-bottom: 1px solid #343c42;
+    background-color:  #202940;
+    /* flex:1; */
+    /* z-index: 999; */
+
+}
+
+.partHeader > p, .partDetailsHeader >p {
+    /* padding-left: 50px; */
+    position: sticky;
+    top: 0;
+    text-align: center;
+    background-color:  #202940;
+    /* flex:1; */
+
+}
+
+.partHeaderIcon, .partDetailsHeaderIcon, .partAddIcon {
+    /* position:relative; */
+    position:sticky;
+    height: 35px;
+    text-align: center;
+    text-justify: center;
+    width: 40px;
+    align-self: center;
+    padding-top: 10px;
+    /* top: 0; */
+    /* display: block; */
+    border-radius: .1875rem;
+    /* background-color: #999; */
+    /* padding: .9375rem; */
+    /* margin-top: -20px; */
+    margin-right: .9375rem;
+    /* float: left; */
+    background: linear-gradient(60deg,#7b1fa2,#913f9e);
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(156,39,176,.4);
+    /* padding: .75rem 1.25rem; */
+    /* margin-bottom: 0; */
+    color: #fff;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    /* z-index: 999; */
+
+}
+
+.partDetailsFields >p {
+    padding: 20px;
+}
+
+/* .fieldRow {
+    display:flex;
+    align-items: center;
+    border-bottom: 1px solid #343c42;
+    padding-bottom: 30px;
+}
+
+.fieldName {
+    font-weight: bolder;
+    margin-right: 25px;
+    text-align: right;
+    width: 5vw;
+} */
+
+.partDetailsEditIcon {
+    color:white;
+    background-color: #fd7e14;
+    padding: 5px;
+    border-radius: 15%;
+}
