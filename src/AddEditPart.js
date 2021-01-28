@@ -13,10 +13,10 @@ function AddEditPart() {
     const editMode = useSelector(selectEditMode)
     const selectedPart = useSelector(selectOpenPart)
     const [partName, setPartName] = useState(editMode ? selectedPart?.Name : '');
-    const [dir1, setDir1] = useState(editMode ? selectedPart?.dir1 : '');
-    const [dir2, setDir2] = useState(editMode ? selectedPart?.dir2 : '');
-    const [dir3, setDir3] = useState(editMode ? selectedPart?.dir3 : '');
-    const [rfc, setRFC] = useState(editMode ? selectedPart?.rfc : '');
+    const [desc, setDesc] = useState(editMode ? selectedPart?.desc : '');
+    const [model, setModel] = useState(editMode ? selectedPart?.model : '');
+    const [nom, setNOM] = useState(editMode ? selectedPart?.nom : '');
+    const [coo, setCOO] = useState(editMode ? selectedPart?.coo : '');
 
 
     const { register, handleSubmit, watch, errors } = useForm();
@@ -28,20 +28,20 @@ function AddEditPart() {
             const doc = selectedPart.Id;
             db.collection('parts').doc(doc).set({
                 partName: formData.partName,
-                dir1: formData.dir1,
-                dir2: formData.dir2,
-                dir3: formData.dir3,
-                rfc: formData.rfc,
+                desc: formData.desc,
+                model: formData.model,
+                nom: formData.nom,
+                coo: formData.coo,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
         }
         else {
             db.collection('parts').add({
                 partName: formData.partName,
-                dir1: formData.dir1,
-                dir2: formData.dir2,
-                dir3: formData.dir3,
-                rfc: formData.rfc,
+                desc: formData.desc,
+                model: formData.model,
+                nom: formData.nom,
+                coo: formData.coo,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
         }
@@ -65,7 +65,7 @@ function AddEditPart() {
         <form onSubmit={handleSubmit(onSubmit)}>
             {/* <form> */}
             <div className="fieldHeader">
-                <p>Name:</p>
+                <p>Número:</p>
             </div>
 
             <input
@@ -78,50 +78,52 @@ function AddEditPart() {
             {errors.partName && <p className="createPart__error">Campo Requerido...</p>}
 
             <div className="fieldHeader">
-                <p>Address Line 1:</p>
+                <p>Descripción</p>
             </div>
             <input
-                name='dir1'
-                value={dir1}
-                onChange={(e) => setDir1(e.target.value)}
+                name='desc'
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
                 type="text"
                 ref={register({ required: true })}
             />
-            {errors.dir1 && <p className="createPart__error">Campo Requerido...</p>}
+            {errors.desc && <p className="createPart__error">Campo Requerido...</p>}
 
             <div className="fieldHeader">
-                <p>Address Line 2:</p>
+                <p>Modelo:</p>
             </div>
             <input
-                name='dir2'
-                onChange={(e) => setDir2(e.target.value)}
-                value={dir2}
+                name='model'
+                onChange={(e) => setModel(e.target.value)}
+                value={model}
                 type="text"
                 ref={register({ required: false })}
             />
 
             <div className="fieldHeader">
-                <p>Address Line 3:</p>
+                <p>NOM:</p>
             </div>
             <input
-                name='dir3'
-                value={dir3}
-                onChange={(e) => setDir3(e.target.value)}
-                type="text"
-                ref={register({ required: false })}
-            />
-
-            <div className="fieldHeader">
-                <p>RFC:</p>
-            </div>
-            <input
-                name='rfc'
-                value={rfc}
-                onChange={(e) => setRFC(e.target.value)}
+                name='nom'
+                value={nom}
+                onChange={(e) => setNOM(e.target.value)}
                 type="text"
                 ref={register({ required: true })}
             />
-            {errors.rfc && <p className="createPart__error">Campo Requerido...</p>}
+            {errors.nom && <p className="createPart__error">Campo Requerido...</p>}
+            
+            <div className="fieldHeader">
+                <p>País de Origen:</p>
+            </div>
+            <input
+                name='coo'
+                value={coo}
+                onChange={(e) => setCOO(e.target.value)}
+                type="text"
+                ref={register({ required: true })}
+            />
+            {errors.coo && <p className="createPart__error">Campo Requerido...</p>}
+
 
             <div className="createPart__options">
                 <Button
