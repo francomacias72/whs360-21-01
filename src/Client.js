@@ -89,8 +89,8 @@ function Client({ header }) {
                         <SettingsApplicationsIcon />
                     </div>
                     <p>Detalles</p>
-                    <IconButton className="secondary">
-                        <div className="editIcon" >
+                    <IconButton className="">
+                        <div className="" >
                             <EditIcon
                                 className="clientDetailsEditIcon"
                                 onClick={() => editClient(selectedClient?.Id)}

@@ -8,15 +8,20 @@ import {
 import Sidebar from './Sidebar'
 import Header from './Header'
 import Body from './Body'
-import CreateClient from './CreateClient'
+// import CreateClient from './CreateClient'
+import AddEditClient from './AddEditClient'
 import { selectCreateClientIsOpen } from './features/clientSlice'
+import { selectCreatePartIsOpen } from './features/partSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from './firebase';
 import Client from './Client';
+import Part from './Part';
+import AddEditPart from './AddEditPart'
 
 
 function App() {
   const createClientIsOpen = useSelector(selectCreateClientIsOpen)
+  const createPartIsOpen = useSelector(selectCreatePartIsOpen)
 
 
   return (
@@ -31,12 +36,13 @@ function App() {
               <Client />
             </Route>
             <Route path="/">
-              <Client />
+              <Part />
             </Route>
           </Switch>
         </div>
 
-        {createClientIsOpen && <CreateClient />}
+        {createClientIsOpen && <AddEditClient />}
+        {createPartIsOpen && <AddEditPart />}
       </div>
     </Router>
   );

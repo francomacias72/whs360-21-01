@@ -1,4 +1,4 @@
-.clientRow {
+.partRow {
     display:flex;
     /* justify-content: space-between; */
     align-items: center;
@@ -10,22 +10,22 @@
     z-index: 0 !important;
 }
 
-.clientRowIcons {
+.partRowIcons {
     padding-right: 20px;
 }
-.clientRowName {
+.partRowName {
     justify-items: left;
 }
 
-.clientRowDescription {
+.partRowDescription {
     padding-right: 10px;
 }
 
-.clientRowIconsColor {
+.partRowIconsColor {
     color: white !important;
 }
 
-.clientRow:hover {
+.partRow:hover {
     background-color: #2c3857;
 }
 

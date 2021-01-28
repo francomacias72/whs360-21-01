@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import './CreateClient.css'
+import './AddEditClient.css'
 import CloseIcon from '@material-ui/icons/Close';
 import { Button } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
@@ -9,7 +9,7 @@ import { closeCreateClient, selectEditMode, selectOpenClient } from './features/
 import { db } from './firebase';
 import firebase from 'firebase'
 
-function CreateClient() {
+function AddEditClient() {
     const editMode = useSelector(selectEditMode)
     const selectedClient = useSelector(selectOpenClient)
     const [clientName, setClientName] = useState(editMode ? selectedClient?.Name : '');
@@ -139,4 +139,4 @@ function CreateClient() {
     );
 }
 
-export default CreateClient;
+export default AddEditClient;
