@@ -10,9 +10,17 @@ import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import { useHistory } from "react-router-dom"
+
 
 
 function Sidebar() {
+    const history = useHistory()
+
+    function alerta() {
+        history.push("/client")
+    }
+
     return (
         <div className='sidebar'>
             <div class="sidebar__top">
@@ -20,8 +28,8 @@ function Sidebar() {
                 <h1>WHS 360</h1>
             </div>
             <div className="sidebarOptions">
-                <SidebarOption Icon={PersonIcon} title="Clientes" number={5} color={"#A53AB7"} />
-                <SidebarOption Icon={ViewHeadlineIcon} title="Partes" number={4} color={"#4caf50"} />
+                <div onClick={() => history.push("/client")}> <SidebarOption Icon={PersonIcon} title="Clientes" number={5} color={"#A53AB7"} /> </div>
+                <div onClick={() => history.push("/part")}><SidebarOption Icon={ViewHeadlineIcon} title="Partes" number={4} color={"#4caf50"} /></div>
                 <SidebarOption Icon={StoreIcon} title="Bodegas/Locaciones" number={2} color={"#fd7e14"} />
                 <SidebarOption Icon={AccountTreeIcon} title="Inventarios" number={2} color={"#6c757d"} />
                 <SidebarOption Icon={ReceiptIcon} title="Recibos" number={25} color={"#17a2b8"} />
@@ -29,7 +37,7 @@ function Sidebar() {
                 <SidebarOption Icon={ImportExportIcon} title="Importaciones" number={2} color={"yellowgreen"} />
                 <SidebarOption Icon={AssessmentIcon} title="Reportes" number={2} color={"#007bff"} />
             </div>
-        </div>
+        </div >
     )
 }
 

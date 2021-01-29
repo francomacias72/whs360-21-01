@@ -68,16 +68,16 @@ function Part({ header }) {
 
                 </div>
                 <div className="partListRows">
-                    {parts.filter(c => c.data.partName.includes(filter)).map(({ id, data: { partName, dir1, dir2, dir3, rfc, timestamp }
+                    {parts.filter(c => c.data.partName.includes(filter)).map(({ id, data: { partName, desc, model, nom, coo, timestamp }
                     }) => (
                         <PartRow
                             Id={id}
                             key={id}
                             Name={partName}
-                            dir1={dir1}
-                            dir2={dir2}
-                            dir3={dir3}
-                            rfc={rfc}
+                            desc={desc}
+                            model={model}
+                            nom={nom}
+                            coo={coo}
                             time={new Date(timestamp?.seconds * 1000).toUTCString()}
                         />
                     ))}
@@ -110,34 +110,34 @@ function Part({ header }) {
                     </div>
                     <div className="fieldRow">
                         <div className="fieldName">
-                            Dir 1:
+                            Descripción:
                         </div>
                         <div className="fieldData">
-                            <p>{selectedPart?.dir1}</p>
+                            <p>{selectedPart?.desc}</p>
                         </div>
                     </div>
                     <div className="fieldRow">
                         <div className="fieldName">
-                            Dir 2:
+                            Modelo:
                         </div>
                         <div className="fieldData">
-                            <p>{selectedPart?.dir2}</p>
+                            <p>{selectedPart?.model}</p>
                         </div>
                     </div>
                     <div className="fieldRow">
                         <div className="fieldName">
-                            Dir 3:
+                            NOM:
                         </div>
                         <div className="fieldData">
-                            <p>{selectedPart?.dir3}</p>
+                            <p>{selectedPart?.nom}</p>
                         </div>
                     </div>
                     <div className="fieldRow">
                         <div className="fieldName">
-                            R.F.C.:
+                            País de Origen:
                         </div>
                         <div className="fieldData">
-                            <p>{selectedPart?.rfc}</p>
+                            <p>{selectedPart?.coo}</p>
                         </div>
                     </div>
 

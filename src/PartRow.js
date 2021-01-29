@@ -11,7 +11,7 @@ import { db } from './firebase';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
 
-function PartRow({ Id, Name, dir1, dir2, dir3, rfc }) {
+function PartRow({ Id, Name, desc, model, nom, coo }) {
     const history = useHistory()
     const dispatch = useDispatch()
 
@@ -20,10 +20,10 @@ function PartRow({ Id, Name, dir1, dir2, dir3, rfc }) {
             selectPart({
                 Id,
                 Name,
-                dir1,
-                dir2,
-                dir3,
-                rfc,
+                desc,
+                model,
+                nom,
+                coo
             })
         );
         // history.push("/mail")
