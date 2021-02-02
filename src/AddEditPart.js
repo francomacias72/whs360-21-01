@@ -46,6 +46,7 @@ function AddEditPart() {
             })
         }
         dispatch(closeCreatePart())
+        // const selectedPart = useSelector(selectOpenPart)
     }
 
     const dispatch = useDispatch();
