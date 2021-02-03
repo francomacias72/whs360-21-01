@@ -1,4 +1,5 @@
 .createClient {
+    min-width: 400px;
     position: absolute;
     top: 10vh;
     right: 38vw;

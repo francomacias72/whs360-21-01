@@ -5,17 +5,17 @@ export const partSlice = createSlice({
     initialState: {
         selectedPart: null,
         createPartIsOpen: false,
-        editMode: false,
+        editModeP: false,
     },
     reducers: {
         selectPart: (state, action) => {
             state.selectedPart = action.payload
         },
-        changeToEdit: (state) => {
-            state.editMode = true;
+        changeToEditP: (state) => {
+            state.editModeP = true;
         },
-        changeToAdd: (state) => {
-            state.editMode = false;
+        changeToAddP: (state) => {
+            state.editModeP = false;
         },
         openCreatePart: (state) => {
             state.createPartIsOpen = true;
@@ -28,14 +28,14 @@ export const partSlice = createSlice({
 
 export const {
     selectPart,
-    changeToEdit,
-    changeToAdd,
+    changeToEditP,
+    changeToAddP,
     openCreatePart,
     closeCreatePart,
 } = partSlice.actions;
 
 export const selectOpenPart = (state) => state.part.selectedPart
-export const selectEditMode = state => state.part.editMode
+export const selectEditModeP = state => state.part.editModeP
 export const selectCreatePartIsOpen = (state) => state.part.createPartIsOpen
 
 export default partSlice.reducer;

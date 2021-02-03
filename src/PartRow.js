@@ -1,17 +1,21 @@
 import React from 'react'
 import './PartRow.css'
 // import EditIcon from '@material-ui/icons/Edit';
-import DetailsIcon from '@material-ui/icons/Details';
+// import DetailsIcon from '@material-ui/icons/Details';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
 import { useHistory } from "react-router-dom"
-import { selectPart } from './features/partSlice';
-import { useDispatch } from 'react-redux'
+import { selectPart, changeToEditP, openCreatePart, selectOpenPart } from './features/partSlice';
+import { useDispatch, useSelector } from 'react-redux'
 import { db } from './firebase';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import { selectOpenClient, } from './features/clientSlice'
+import EditIcon from '@material-ui/icons/Edit';
 
 
-function PartRow({ Id, Name, desc, model, nom, coo }) {
+function PartRow({ Id, Name, desc, model, nom, coo, clientId }) {
+    const selectedClient = useSelector(selectOpenClient)
+    const selectedPart = useSelector(selectOpenPart)
     const history = useHistory()
     const dispatch = useDispatch()
 
@@ -23,7 +27,8 @@ function PartRow({ Id, Name, desc, model, nom, coo }) {
                 desc,
                 model,
                 nom,
-                coo
+                coo,
+                clientId,
             })
         );
         // history.push("/mail")
@@ -41,36 +46,73 @@ function PartRow({ Id, Name, desc, model, nom, coo }) {
             dispatch(
                 selectPart({
                     Id: null,
-                    Name: null,
-                    dir1: null,
-                    dir2: null,
-                    dir3: null,
-                    rfc: null,
+                    Name,
+                    desc,
+                    model,
+                    nom,
+                    coo,
+                    clientId,
                 })
             );
         }
     }
 
-    return (
-        <div className="partRow">
-            <div className="partRowIcons">
-                <IconButton className="partRowIconsColor">
-                    <div onClick={openPart} className="editIcon">
-                        <ListAltIcon className="partRowEditIcon" />
-                    </div>
-                </IconButton>
-                <IconButton className="partRowIconsColor">
-                    <div className="deleteIcon" onClick={deletePart}>
-                        <DeleteIcon className="partRowDeleteIcon" />
-                    </div>
-                </IconButton>
+    function editPart(client) {
+        dispatch(
+            selectPart({
+                Id,
+                Name,
+                desc,
+                model,
+                nom,
+                coo,
+                clientId,
+            })
+        );
+        dispatch(changeToEditP())
+        dispatch(openCreatePart())
+        // if (selectedClient?.Id) {
+        //    dispatch(changeToEdit())
+        //    dispatch(openCreateClient())    
+        // }
+    }
 
+    // console.log("selected id: ", selectedClient?.Id)
+    // console.log("clientId: ", clientId)
+    if (selectedClient?.Id === clientId) {
+        return (
+
+            <div className="partRow">
+                <div className="partRowIcons">
+                    {/* <IconButton className="partRowIconsColor">
+                        <div onClick={openPart} className="editIcon">
+                            <ListAltIcon className="partRowEditIcon" />
+                        </div>
+                    </IconButton> */}
+                    <IconButton>
+                        {/* <div className="" > */}
+                        <EditIcon
+                            className="clientDetailsEditIcon"
+                            onClick={() => editPart(selectedPart?.Id)}
+                        />
+                        {/* </div> */}
+                    </IconButton>
+                    <IconButton className="partRowIconsColor">
+                        <div className="deleteIcon" onClick={deletePart}>
+                            <DeleteIcon className="partRowDeleteIcon" />
+                        </div>
+                    </IconButton>
+
+                </div>
+                {/* <div className="partRowId">{Id}</div> */}
+                <div className="partRowName">{Name}</div>
+                {/* <div className="partRowDescription">{Description}</div> */}
             </div>
-            {/* <div className="partRowId">{Id}</div> */}
-            <div className="partRowName">{Name}</div>
-            {/* <div className="partRowDescription">{Description}</div> */}
-        </div>
-    )
+        )
+    }
+    else {
+        return (null)
+    }
 }
 
 export default PartRow

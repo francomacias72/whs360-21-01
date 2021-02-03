@@ -65,7 +65,7 @@ function AddEditClient() {
         <form onSubmit={handleSubmit(onSubmit)}>
             {/* <form> */}
             <div className="fieldHeader">
-                <p>Name:</p>
+                <p>Cliente:</p>
             </div>
 
             <input
@@ -78,7 +78,7 @@ function AddEditClient() {
             {errors.clientName && <p className="createClient__error">Campo Requerido...</p>}
 
             <div className="fieldHeader">
-                <p>Address Line 1:</p>
+                <p>Dir 1:</p>
             </div>
             <input
                 name='dir1'
@@ -90,7 +90,7 @@ function AddEditClient() {
             {errors.dir1 && <p className="createClient__error">Campo Requerido...</p>}
 
             <div className="fieldHeader">
-                <p>Address Line 2:</p>
+                <p>Dir 2:</p>
             </div>
             <input
                 name='dir2'
@@ -101,7 +101,7 @@ function AddEditClient() {
             />
 
             <div className="fieldHeader">
-                <p>Address Line 3:</p>
+                <p>Dir 3:</p>
             </div>
             <input
                 name='dir3'

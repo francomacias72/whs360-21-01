@@ -5,13 +5,15 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Button } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { closeCreatePart, selectEditMode, selectOpenPart } from './features/partSlice'
+import { closeCreatePart, selectEditModeP, selectOpenPart } from './features/partSlice'
+import { selectOpenClient } from './features/clientSlice'
 import { db } from './firebase';
 import firebase from 'firebase'
 
 function AddEditPart() {
-    const editMode = useSelector(selectEditMode)
+    const editMode = useSelector(selectEditModeP)
     const selectedPart = useSelector(selectOpenPart)
+    const selectedClient = useSelector(selectOpenClient)
     const [partName, setPartName] = useState(editMode ? selectedPart?.Name : '');
     const [desc, setDesc] = useState(editMode ? selectedPart?.desc : '');
     const [model, setModel] = useState(editMode ? selectedPart?.model : '');
@@ -32,6 +34,7 @@ function AddEditPart() {
                 model: formData.model,
                 nom: formData.nom,
                 coo: formData.coo,
+                clientId: selectedClient.Id,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
         }
@@ -42,6 +45,7 @@ function AddEditPart() {
                 model: formData.model,
                 nom: formData.nom,
                 coo: formData.coo,
+                clientId: selectedClient.Id,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
         }
@@ -54,6 +58,9 @@ function AddEditPart() {
     function partClose() {
         dispatch(closeCreatePart())
     }
+
+    console.log("editModeAddPart:", editMode)
+
 
     return (<div className="createPart">
         <div className="createPart__header">
@@ -112,7 +119,7 @@ function AddEditPart() {
                 ref={register({ required: true })}
             />
             {errors.nom && <p className="createPart__error">Campo Requerido...</p>}
-            
+
             <div className="fieldHeader">
                 <p>País de Origen:</p>
             </div>

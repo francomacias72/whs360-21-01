@@ -6,12 +6,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
 import { useHistory } from "react-router-dom"
 import { selectClient } from './features/clientSlice';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { db } from './firebase';
+import EditIcon from '@material-ui/icons/Edit';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import { openCreateClient, changeToEdit, selectOpenClient, } from './features/clientSlice'
+
 
 
 function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
+    const selectedClient = useSelector(selectOpenClient)
+
     const history = useHistory()
     const dispatch = useDispatch()
 
@@ -26,9 +31,6 @@ function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
                 rfc,
             })
         );
-        // history.push("/mail")
-        // console.log (Id, Name, dir1, dir2, dir3, rfc)
-
     }
 
     function deleteClient() {
@@ -49,15 +51,43 @@ function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
                 })
             );
         }
+
+    }
+
+    function editClient(client) {
+        dispatch(
+            selectClient({
+                Id,
+                Name,
+                dir1,
+                dir2,
+                dir3,
+                rfc,
+            })
+        );
+        dispatch(changeToEdit())
+        dispatch(openCreateClient())
+        // if (selectedClient?.Id) {
+        //    dispatch(changeToEdit())
+        //    dispatch(openCreateClient())    
+        // }
     }
 
     return (
         <div className="clientRow">
             <div className="clientRowIcons">
-                <IconButton className="clientRowIconsColor">
+                {/* <IconButton className="clientRowIconsColor">
                     <div onClick={openClient} className="editIcon">
                         <ListAltIcon className="clientRowEditIcon" />
                     </div>
+                </IconButton> */}
+                <IconButton>
+                    {/* <div className="" > */}
+                    <EditIcon
+                        className="clientDetailsEditIcon"
+                        onClick={() => editClient(selectedClient?.Id)}
+                    />
+                    {/* </div> */}
                 </IconButton>
                 <IconButton className="clientRowIconsColor">
                     <div className="deleteIcon" onClick={deleteClient}>
@@ -67,7 +97,10 @@ function ClientRow({ Id, Name, dir1, dir2, dir3, rfc }) {
 
             </div>
             {/* <div className="clientRowId">{Id}</div> */}
-            <div className="clientRowName">{Name}</div>
+            <div className="clientRowName"
+                onClick={openClient}
+                style={{ cursor: 'pointer' }}
+            >{Name}</div>
             {/* <div className="clientRowDescription">{Description}</div> */}
         </div>
     )

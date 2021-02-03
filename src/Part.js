@@ -7,13 +7,15 @@ import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import { useDispatch, useSelector } from 'react-redux'
-import { openCreatePart, selectOpenPart, changeToEdit, changeToAdd } from './features/partSlice'
+import { openCreatePart, selectOpenPart, changeToEditP, changeToAddP } from './features/partSlice'
+import { selectOpenClient } from './features/clientSlice'
 import { db } from './firebase';
 
 
 
 function Part({ header }) {
     const dispatch = useDispatch()
+    const selectedClient = useSelector(selectOpenClient)
     const selectedPart = useSelector(selectOpenPart)
 
     const [parts, setParts] = useState([])
@@ -21,6 +23,7 @@ function Part({ header }) {
 
     useEffect(() => {
         db.collection('parts')
+            // .where('clientId', '==', 'djBwgyZYFee0SVAuBIfl')
             .orderBy('partName', 'asc')
             .onSnapshot(snapshot =>
                 setParts(
@@ -32,6 +35,18 @@ function Part({ header }) {
             )
     }, [])
 
+    db.collection("parts").where("clientId", "==", 'djBwgyZYFee0SVAuBIfl')
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
+        })
+        .catch(function (error) {
+            console.log("Error getting documents: ", error);
+        });
+
     function filterChange(e) {
         setFilter(e.target.value)
     }
@@ -39,13 +54,13 @@ function Part({ header }) {
     // console.log(parts.filter(c => c.data.rfc.includes('E')))
     function editPart(part) {
         if (selectedPart?.Id) {
-            dispatch(changeToEdit())
+            dispatch(changeToEditP())
             dispatch(openCreatePart())
         }
     }
     function addPart() {
         dispatch(openCreatePart())
-        dispatch(changeToAdd())
+        dispatch(changeToAddP())
     }
 
     return (
@@ -68,7 +83,7 @@ function Part({ header }) {
 
                 </div>
                 <div className="partListRows">
-                    {parts.filter(c => c.data.partName.includes(filter)).map(({ id, data: { partName, desc, model, nom, coo, timestamp }
+                    {parts.filter(c => c.data.partName.includes(filter)).map(({ id, data: { partName, desc, model, nom, coo, clientId, timestamp }
                     }) => (
                         <PartRow
                             Id={id}
@@ -78,6 +93,7 @@ function Part({ header }) {
                             model={model}
                             nom={nom}
                             coo={coo}
+                            clientId={clientId}
                             time={new Date(timestamp?.seconds * 1000).toUTCString()}
                         />
                     ))}

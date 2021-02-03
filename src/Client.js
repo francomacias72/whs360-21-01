@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Client.css'
 import ClientRow from './ClientRow'
+import PartRow from './PartRow'
 import PersonIcon from '@material-ui/icons/Person';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { IconButton } from '@material-ui/core';
@@ -8,6 +9,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import { useDispatch, useSelector } from 'react-redux'
 import { openCreateClient, selectOpenClient, changeToEdit, changeToAdd } from './features/clientSlice'
+import { openCreatePart, selectOpenPart, changeToEditP, changeToAddP } from './features/partSlice'
 import { db } from './firebase';
 
 
@@ -32,8 +34,29 @@ function Client({ header }) {
             )
     }, [])
 
+    const [parts, setParts] = useState([])
+    const [filterP, setFilterP] = useState('')
+
+    useEffect(() => {
+        db.collection('parts')
+            // .where('clientId', '==', 'djBwgyZYFee0SVAuBIfl')
+            .orderBy('partName', 'asc')
+            .onSnapshot(snapshot =>
+                setParts(
+                    snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        data: doc.data(),
+                    }))
+                )
+            )
+    }, [])
+
     function filterChange(e) {
         setFilter(e.target.value)
+    }
+
+    function filterChangeP(e) {
+        setFilterP(e.target.value)
     }
     // clients.filter(c => c.data.rfc.includes('E'))
     // console.log(clients.filter(c => c.data.rfc.includes('E')))
@@ -48,21 +71,35 @@ function Client({ header }) {
         dispatch(changeToAdd())
     }
 
+    function addPart() {
+        dispatch(openCreatePart())
+        dispatch(changeToAdd())
+    }
+
     return (
         <div className="client">
             <div className="clientList">
+                <div className="headerRow">
+                    <div className="headerSearch">
+                        <input
+                            placeholder='Buscar...'
+                            onChange={filterChangeP}
+                        >
+                        </input>
+                    </div>
+                </div>
                 <div className="clientHeader">
                     <div className="clientHeaderIcon">
                         <PersonIcon />
                     </div>
                     <p>Clientes</p>
-                    <div className="headerSearch">
+                    {/* <div className="headerSearch">
                         <input
                             placeholder='Buscar...'
                             onChange={filterChange}
                         >
                         </input>
-                    </div>
+                    </div> */}
 
                     <AddCircleIcon onClick={addClient} className="addClientIcon" />
 
@@ -84,63 +121,44 @@ function Client({ header }) {
                 </div>
             </div>
             <div className="clientDetails">
-                <div className="clientDetailsHeader">
-                    <div className="clientDetailsHeaderIcon">
-                        <SettingsApplicationsIcon />
+                <div className="headerRow">
+                    <div className="headerSearch">
+                        <input
+                            placeholder='Buscar...'
+                            onChange={filterChangeP}
+                        >
+                        </input>
                     </div>
-                    <p>Detalles</p>
+                </div>
+                <div className="clientDetailsHeader">
+                    <p style={{ marginLeft: '20px' }}>Partes</p>
+                    {/* <div className="clientNameHeader"> */}
+                    <p style={{ fontSize: '14px', color: 'lightblue', textTransform: "none", margin: '0' }}>
+                        {selectedClient?.Name}</p>
+                    {/* </div> */}
+
                     <IconButton className="">
                         <div className="" >
-                            <EditIcon
-                                className="clientDetailsEditIcon"
-                                onClick={() => editClient(selectedClient?.Id)}
-                            // onClick={() => dispatch(changeToEdit())}
-                            />
+                            <AddCircleIcon onClick={addPart} className="addPartIcon" />
                         </div>
                     </IconButton>
                 </div>
-                <div className="clientDetailsFields">
-                    <div className="fieldRow">
-                        <div className="fieldName">
-                            Cliente:
-                        </div>
-                        <div className="fieldData">
-                            <p>{selectedClient?.Name}</p>
-                        </div>
-                    </div>
-                    <div className="fieldRow">
-                        <div className="fieldName">
-                            Dir 1:
-                        </div>
-                        <div className="fieldData">
-                            <p>{selectedClient?.dir1}</p>
-                        </div>
-                    </div>
-                    <div className="fieldRow">
-                        <div className="fieldName">
-                            Dir 2:
-                        </div>
-                        <div className="fieldData">
-                            <p>{selectedClient?.dir2}</p>
-                        </div>
-                    </div>
-                    <div className="fieldRow">
-                        <div className="fieldName">
-                            Dir 3:
-                        </div>
-                        <div className="fieldData">
-                            <p>{selectedClient?.dir3}</p>
-                        </div>
-                    </div>
-                    <div className="fieldRow">
-                        <div className="fieldName">
-                            R.F.C.:
-                        </div>
-                        <div className="fieldData">
-                            <p>{selectedClient?.rfc}</p>
-                        </div>
-                    </div>
 
+                <div className="partListRows">
+                    {parts.filter(c => c.data.partName.includes(filterP)).map(({ id, data: { partName, desc, model, nom, coo, clientId, timestamp }
+                    }) => (
+                        <PartRow
+                            Id={id}
+                            key={id}
+                            Name={partName}
+                            desc={desc}
+                            model={model}
+                            nom={nom}
+                            coo={coo}
+                            clientId={clientId}
+                            time={new Date(timestamp?.seconds * 1000).toUTCString()}
+                        />
+                    ))}
                 </div>
             </div>
 

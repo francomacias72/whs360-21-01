@@ -16,6 +16,9 @@
 .clientRowName {
     justify-items: left;
 }
+.clientRowName:hover {
+    color: yellow;
+}
 
 .clientRowDescription {
     padding-right: 10px;
