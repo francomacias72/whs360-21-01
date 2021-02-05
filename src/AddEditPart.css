@@ -1,6 +1,7 @@
 .createPart {
     position: absolute;
     top: 10vh;
+    min-width: 400px;
     right: 38vw;
     background-color: #081229;
     /* width: 20%; */

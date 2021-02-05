@@ -1,0 +1,142 @@
+.clientes2{
+    display:flex;
+    /* justify-content: space-between; */
+    flex-direction: column;
+    padding: 0;
+    width: 40vw;
+    margin-left:20px;
+    background-color: #202940;
+    margin-top: 60px;
+
+}
+
+.clientPart {
+    display:flex;
+    justify-content: space-between;
+}
+
+.clientes2Header{
+    /* border: 1px solid white; */
+    max-height: 600px;
+    overflow: auto;
+    /* padding: 10px; */
+    margin-left:0;
+    margin-right:0;
+}
+
+.clientes2List{
+    /* border: 1px solid white; */
+    max-height: 500px;
+    overflow: auto;
+    margin-top: 0px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    /* align-content: center; */
+}
+
+.clientes2List > p {
+    text-align: center;
+}
+
+.clientes2List::-webkit-scrollbar {
+    display: none;
+}
+
+.headerSearch2 {
+    display:flex;
+    justify-content: center;
+    font-size: 16px;
+    /* background-color: #202940; */
+    /* width: 110px; */
+    /* height: 30px; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 0 !important;
+}
+
+.headerSearch2 > input{
+    background-color: transparent;
+    border:none;
+    margin: 0;
+    padding:3px;
+    color:yellow;
+    text-align: center;
+    /* box-shadow: none; */
+    outline: none;
+}
+
+.headerSearch2 > input:focus {
+    border: 1px solid white;
+}
+
+.clientHeader2, .clientDetailsHeader2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    /* margin-left: 15px; */
+    /* margin-right: 15px; */
+    /* padding-bottom: 10px; */
+    /* margin-bottom: 10px; */
+    font-size: 20px;
+    color:white;
+    text-transform: uppercase;
+    border-bottom: 1px solid #343c42;
+    background-color:  #202940;
+    /* flex:1; */
+    /* z-index: 999; */
+
+}
+
+.clientHeader2 > p, .clientDetailsHeader2 >p {
+    /* padding-left: 50px; */
+    position: sticky;
+    top: 0;
+    text-align: center;
+    background-color:  #202940;
+    /* flex:1; */
+
+}
+
+.clientHeaderIcon2, .clientDetailsHeaderIcon2, .clientAddIcon2 {
+    /* position:relative; */
+    position:sticky;
+    height: 35px;
+    text-align: center;
+    text-justify: center;
+    width: 40px;
+    align-self: center;
+    padding-top: 10px;
+    /* top: 0; */
+    /* display: block; */
+    border-radius: .1875rem;
+    /* background-color: #999; */
+    /* padding: .9375rem; */
+    /* margin-top: -20px; */
+    margin-right: .9375rem;
+    /* float: left; */
+    background: linear-gradient(60deg,#7b1fa2,#913f9e);
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(156,39,176,.4);
+    /* padding: .75rem 1.25rem; */
+    /* margin-bottom: 0; */
+    color: #fff;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    /* z-index: 999; */
+
+}
+
+.clientListRows2 {
+    color: #8B928E;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-content: flex-start; */
+}
+
+.clientes2List {
+    display:flex;
+    justify-content: start;
+}

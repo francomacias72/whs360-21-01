@@ -82,6 +82,7 @@ function AddEditPart() {
                 value={partName}
                 onChange={(e) => setPartName(e.target.value)}
                 ref={register({ required: true })}
+                tabindex="0"
             />
             {errors.partName && <p className="createPart__error">Campo Requerido...</p>}
 

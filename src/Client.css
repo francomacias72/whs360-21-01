@@ -1,5 +1,6 @@
 .client {
     display: flex;
+    /* flex-direction: column; */
     justify-content: space-between;
     overflow: auto; 
     padding: 0;
@@ -11,7 +12,6 @@
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #444649;
-
 }
 
 .addClientIcon {
@@ -24,23 +24,43 @@
 }
 
 .clientList, .clientDetails {
-    border-bottom: 2px solid #111624;
+    /* border-bottom: 2px solid #111624; */
     border-right: 2px solid #111624;
     margin: 20px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     /* padding: 10px; */
     background-color: #202940;
     color: #8B928E;
     width: 40vw;
     max-height: 77vh;
-    overflow: auto;
+    /* overflow: auto; */
     min-width: 354px;
+    margin-bottom: 0;
+    margin-top: 0;
     /* z-index: 999; */
-
 }
 
-.clientList::-webkit-scrollbar, .clientDetails::-webkit-scrollbar {
+.headerMain, .headerSecondary {
+    border-right: 2px solid #111624;
+    margin-top: 60px;
+    background-color: #202940;
+    color: #8B928E;
+    width: 40vw;
+    max-height: 77vh;
+    min-width: 354px;
+    margin-bottom: 0;
+    /* position: sticky; */
+}
+
+.clientList::-webkit-scrollbar, .clientDetails::-webkit-scrollbar, .client::-webkit-scrollbar{
     display:none;
+}
+
+.headerMain  {
+    position: sticky;
+    top: 60px;
+    /* z-index: 99999 !important; */
+    /* background-color: red; */
 }
 
 .clientHeader, .clientDetailsHeader {
@@ -124,4 +144,10 @@
     background-color: #fd7e14;
     padding: 5px;
     border-radius: 15%;
+}
+
+.clientMain {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

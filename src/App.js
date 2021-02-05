@@ -17,6 +17,8 @@ import { auth } from './firebase';
 import Client from './Client';
 import Part from './Part';
 import AddEditPart from './AddEditPart'
+import WhsZone from './WhsZone';
+import ClientPart from './ClientPart';
 
 
 function App() {
@@ -34,6 +36,12 @@ function App() {
           <Switch>
             <Route path="/client">
               <Client />
+            </Route>
+            <Route path="/clientes">
+              <ClientPart />
+            </Route>
+            <Route path="/bodegas">
+              <WhsZone />
             </Route>
             <Route path="/">
               <Part />

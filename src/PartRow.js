@@ -37,7 +37,7 @@ function PartRow({ Id, Name, desc, model, nom, coo, clientId }) {
     }
 
     function deletePart() {
-        if (window.confirm("¿Está seguro que quiere borrar Parte?")) {
+        if (window.confirm("¿Está seguro que quiere borrar Parte: " + Name + "?")) {
             db.collection("parts").doc(Id).delete().then(function () {
                 console.log("Document successfully deleted!");
             }).catch(function (error) {
@@ -99,13 +99,15 @@ function PartRow({ Id, Name, desc, model, nom, coo, clientId }) {
                     </IconButton>
                     <IconButton className="partRowIconsColor">
                         <div className="deleteIcon" onClick={deletePart}>
-                            <DeleteIcon className="partRowDeleteIcon" />
+                            <DeleteIcon className="partRowDeleteIcon"
+                            />
+
                         </div>
                     </IconButton>
 
                 </div>
                 {/* <div className="partRowId">{Id}</div> */}
-                <div className="partRowName">{Name}</div>
+                <div className="partRowName"><strong>{Name}</strong> {" - " + desc.substring(0, 30) + "..."}</div>
                 {/* <div className="partRowDescription">{Description}</div> */}
             </div>
         )

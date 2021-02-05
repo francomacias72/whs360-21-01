@@ -73,92 +73,105 @@ function Client({ header }) {
 
     function addPart() {
         dispatch(openCreatePart())
-        dispatch(changeToAdd())
+        dispatch(changeToAddP())
     }
 
     return (
         <div className="client">
-            <div className="clientList">
-                <div className="headerRow">
-                    <div className="headerSearch">
-                        <input
-                            placeholder='Buscar...'
-                            onChange={filterChangeP}
-                        >
-                        </input>
+
+            <div className="clientMain">
+
+                <div className="headerMain">
+                    <div className="headerRow">
+                        <div className="headerSearch">
+                            <input
+                                placeholder='Buscar Cliente...'
+                                onChange={filterChange}
+                            >
+                            </input>
+                        </div>
+                    </div>
+                    <div className="clientHeader">
+                        <p style={{ marginLeft: '20px' }}>Clientes</p>
+                        {/* <div className="clientNameHeader"> */}
+                        <p style={{ fontSize: '14px', color: 'lightblue', textTransform: "none", margin: '0' }}>
+                            {selectedClient?.Name}</p>
+                        {/* </div> */}
+
+                        <IconButton className="">
+                            <div className="" >
+                                <AddCircleIcon onClick={addClient} className="addPartIcon" />
+                            </div>
+                        </IconButton>
+
                     </div>
                 </div>
-                <div className="clientHeader">
-                    <div className="clientHeaderIcon">
-                        <PersonIcon />
+                <div className="listMain">
+                    <div className="clientList">
+
+                        <div className="clientListRows">
+                            {clients.filter(c => c.data.clientName.includes(filter)).map(({ id, data: { clientName, dir1, dir2, dir3, rfc, timestamp }
+                            }) => (
+                                <ClientRow
+                                    Id={id}
+                                    key={id}
+                                    Name={clientName}
+                                    dir1={dir1}
+                                    dir2={dir2}
+                                    dir3={dir3}
+                                    rfc={rfc}
+                                    time={new Date(timestamp?.seconds * 1000).toUTCString()}
+                                />
+                            ))}
+                        </div>
                     </div>
-                    <p>Clientes</p>
-                    {/* <div className="headerSearch">
-                        <input
-                            placeholder='Buscar...'
-                            onChange={filterChange}
-                        >
-                        </input>
-                    </div> */}
-
-                    <AddCircleIcon onClick={addClient} className="addClientIcon" />
-
-                </div>
-                <div className="clientListRows">
-                    {clients.filter(c => c.data.clientName.includes(filter)).map(({ id, data: { clientName, dir1, dir2, dir3, rfc, timestamp }
-                    }) => (
-                        <ClientRow
-                            Id={id}
-                            key={id}
-                            Name={clientName}
-                            dir1={dir1}
-                            dir2={dir2}
-                            dir3={dir3}
-                            rfc={rfc}
-                            time={new Date(timestamp?.seconds * 1000).toUTCString()}
-                        />
-                    ))}
                 </div>
             </div>
-            <div className="clientDetails">
-                <div className="headerRow">
-                    <div className="headerSearch">
-                        <input
-                            placeholder='Buscar...'
-                            onChange={filterChangeP}
-                        >
-                        </input>
-                    </div>
-                </div>
-                <div className="clientDetailsHeader">
-                    <p style={{ marginLeft: '20px' }}>Partes</p>
-                    {/* <div className="clientNameHeader"> */}
-                    <p style={{ fontSize: '14px', color: 'lightblue', textTransform: "none", margin: '0' }}>
-                        {selectedClient?.Name}</p>
-                    {/* </div> */}
 
-                    <IconButton className="">
-                        <div className="" >
-                            <AddCircleIcon onClick={addPart} className="addPartIcon" />
+            <div className="clientSecondary">
+                <div className="headerSecondary">
+                    <div className="clientDetails">
+                        <div className="headerRow">
+                            <div className="headerSearch">
+                                <input
+                                    placeholder='Buscar Parte...'
+                                    onChange={filterChangeP}
+                                >
+                                </input>
+                            </div>
                         </div>
-                    </IconButton>
-                </div>
+                        <div className="clientDetailsHeader">
+                            <p style={{ marginLeft: '20px' }}>Partes</p>
+                            {/* <div className="clientNameHeader"> */}
+                            <p style={{ fontSize: '14px', color: 'lightblue', textTransform: "none", margin: '0' }}>
+                                {selectedClient?.Name}</p>
+                            {/* </div> */}
 
-                <div className="partListRows">
-                    {parts.filter(c => c.data.partName.includes(filterP)).map(({ id, data: { partName, desc, model, nom, coo, clientId, timestamp }
-                    }) => (
-                        <PartRow
-                            Id={id}
-                            key={id}
-                            Name={partName}
-                            desc={desc}
-                            model={model}
-                            nom={nom}
-                            coo={coo}
-                            clientId={clientId}
-                            time={new Date(timestamp?.seconds * 1000).toUTCString()}
-                        />
-                    ))}
+                            <IconButton className="">
+                                <div className="" >
+                                    <AddCircleIcon onClick={addPart} className="addPartIcon" />
+                                </div>
+                            </IconButton>
+                        </div>
+
+                    </div>
+
+                    <div className="partListRows">
+                        {parts.filter(c => c.data.partName.includes(filterP)).map(({ id, data: { partName, desc, model, nom, coo, clientId, timestamp }
+                        }) => (
+                            <PartRow
+                                Id={id}
+                                key={id}
+                                Name={partName}
+                                desc={desc}
+                                model={model}
+                                nom={nom}
+                                coo={coo}
+                                clientId={clientId}
+                                time={new Date(timestamp?.seconds * 1000).toUTCString()}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
 

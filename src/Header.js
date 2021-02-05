@@ -14,9 +14,9 @@ function Header() {
                 </IconButton>
                 <h1>Sustaita Forwarding L.L.C.</h1>
             </div>
-            <div className="headerSearch">
+            {/* <div className="headerSearch">
                 <input type="text" placeholder="Buscar..." />
-            </div>
+            </div> */}
             <div className="headerRight">
                 <IconButton>
                     <AppsIcon className="header__iconColor" />
