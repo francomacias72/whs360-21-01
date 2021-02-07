@@ -1,7 +1,6 @@
 import './ClientPart.css'
 import React, { useEffect, useState } from 'react'
 import './Client.css'
-// import WhsRow from './WhsRow'
 import WhsRow from './WhsRow'
 import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -53,16 +52,14 @@ function WhsList() {
                 </div>
                 <div className="clientHeader">
                     <p style={{ marginLeft: '20px' }}>Bodegas</p>
-                    {/* <div className="whsNameHeader"> */}
                     <p style={{ fontSize: '14px', color: 'lightblue', textTransform: "none", margin: '0' }}>
                         {selectedWhs?.Name}</p>
-                    {/* </div> */}
 
                     <IconButton className="">
                         <div className="" >
                             <AddCircleIcon
                                 onClick={addWhs}
-                                className="addPartIcon" />
+                                className="addClientIcon" />
                         </div>
                     </IconButton>
 

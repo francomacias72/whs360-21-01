@@ -31,7 +31,7 @@ function AddEditWhs() {
                 dir1: formData.dir1,
                 dir2: formData.dir2,
                 dir3: formData.dir3,
-                active: formData.active,
+                active: true,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
         }
@@ -41,7 +41,7 @@ function AddEditWhs() {
                 dir1: formData.dir1,
                 dir2: formData.dir2,
                 dir3: formData.dir3,
-                active: formData.active,
+                active: true,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
         }

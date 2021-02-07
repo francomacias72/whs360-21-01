@@ -1,7 +1,5 @@
 import React from 'react'
 import './PartRow.css'
-// import EditIcon from '@material-ui/icons/Edit';
-// import DetailsIcon from '@material-ui/icons/Details';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
 import { useHistory } from "react-router-dom"

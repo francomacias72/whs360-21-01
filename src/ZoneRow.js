@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom"
 import { selectZone, changeToEditZ, openCreateZone, selectOpenZone } from './features/zoneSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import { db } from './firebase';
-import ListAltIcon from '@material-ui/icons/ListAlt';
 import { selectOpenWhs, } from './features/whsSlice'
 import EditIcon from '@material-ui/icons/Edit';
 

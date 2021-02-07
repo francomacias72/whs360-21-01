@@ -12,18 +12,25 @@ import Body from './Body'
 import AddEditClient from './AddEditClient'
 import { selectCreateClientIsOpen } from './features/clientSlice'
 import { selectCreatePartIsOpen } from './features/partSlice'
+import { selectCreateWhsIsOpen } from './features/whsSlice'
+import { selectCreateZoneIsOpen } from './features/zoneSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from './firebase';
 import Client from './Client';
-import Part from './Part';
+// import Part from './Part2';
 import AddEditPart from './AddEditPart'
 import WhsZone from './WhsZone';
 import ClientPart from './ClientPart';
+import AddEditWhs from './AddEditWhs';
+import AddEditZone from './AddEditZone';
+import Receipts from './Receipts';
 
 
 function App() {
   const createClientIsOpen = useSelector(selectCreateClientIsOpen)
   const createPartIsOpen = useSelector(selectCreatePartIsOpen)
+  const createWhsIsOpen = useSelector(selectCreateWhsIsOpen)
+  const createZoneIsOpen = useSelector(selectCreateZoneIsOpen)
 
 
   return (
@@ -43,14 +50,19 @@ function App() {
             <Route path="/bodegas">
               <WhsZone />
             </Route>
+            <Route path="/recibos">
+              <Receipts />
+            </Route>
             <Route path="/">
-              <Part />
+              <ClientPart />
             </Route>
           </Switch>
         </div>
 
         {createClientIsOpen && <AddEditClient />}
         {createPartIsOpen && <AddEditPart />}
+        {createWhsIsOpen && <AddEditWhs />}
+        {createZoneIsOpen && <AddEditZone />}
       </div>
     </Router>
   );

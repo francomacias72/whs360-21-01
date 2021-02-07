@@ -1,0 +1,99 @@
+.createZone {
+    position: absolute;
+    top: 10vh;
+    min-width: 400px;
+    right: 38vw;
+    background-color: #081229;
+    /* width: 20%; */
+    /* height: 40%; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid whitesmoke;
+    box-shadow: 0px 5px 7px 0 rgba(0,0,0,0.24);
+}
+
+
+.createZone__header {
+    /* padding-top: 10px;  */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: grey;
+    border-bottom: 1px solid #516391;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.createZone__header > h3 {
+    color: whitesmoke;
+    font-size: 25px;    
+    margin: 10px 15px 15px 15px;
+}
+
+.createZone__send {
+    background-color: #ff7aa8 !important;
+    text-transform: capitalize !important;
+    margin: 15px !important;
+}
+
+.createZone__close{
+    cursor:pointer;
+}
+
+.createZone > form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.createZone2 > form > input{
+    height: 30px;   
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid whitesmoke;
+    outline: none;
+    background-color: #081229;
+    border-radius: 50%;
+}
+
+.createZone__message {
+    flex: 1;
+}
+
+.createZone__error{
+    /* background-color: #ff7aa8; */
+    color:red;
+    text-align: right;
+    margin:0;
+    padding: 1px; 
+    font-size: smaller;
+}
+
+.fieldHeader > p {
+    color:white;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+
+
+form>input {
+    margin: 0px 20px 0px 20px;
+    font-size: 15px;
+}
+
+form>input:hover {
+    border: 2px solid #ff7aa8;
+}
+
+.createZone__options {
+    display:flex;
+    justify-content: center;
+    /* width: auto; */
+}
+
+.MuiButton-containedPrimary {
+    flex: .6;
+}

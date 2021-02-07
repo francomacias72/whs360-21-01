@@ -14,6 +14,7 @@ function ZoneList() {
     const selectedWhs = useSelector(selectOpenWhs)
     const [zones, setZones] = useState([])
     const [filterZ, setFilterZ] = useState('')
+    console.log("Select WHS: ", selectedWhs)
 
     useEffect(() => {
         db.collection('zones')
@@ -63,17 +64,17 @@ function ZoneList() {
             </div>
             <div className="clientes2List">
                 <div className="clientListRows2">
-                    {zones.filter(c => c.data.zoneName.includes(filterZ)).map(({ id, data: { zoneName, desc, model, nom, coo, clientId, timestamp }
+                    {zones.filter(c => c.data.zoneName.includes(filterZ)).map(({ id, data: { zoneName, desc, whsId, timestamp }
                     }) => (
                         <ZoneRow
                             Id={id}
                             key={id}
                             Name={zoneName}
                             desc={desc}
-                            model={model}
-                            nom={nom}
-                            coo={coo}
-                            clientId={clientId}
+                            // dir2={dir2}
+                            // dir3={dir3}
+                            // active={active}
+                            whsId={whsId}
                             time={new Date(timestamp?.seconds * 1000).toUTCString()}
                         />
                     ))}

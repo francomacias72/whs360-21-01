@@ -55,7 +55,7 @@ function PartList() {
 
                     <IconButton className="">
                         <div className="" >
-                            <AddCircleIcon onClick={addPart} className="addPartIcon" />
+                            <AddCircleIcon onClick={addPart} className="addClientIcon" />
                         </div>
                     </IconButton>
 

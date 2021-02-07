@@ -5,7 +5,7 @@ import ClientRow from './ClientRow'
 import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { useDispatch, useSelector } from 'react-redux'
-import { openCreateClient, selectOpenClient, changeToEdit, changeToAdd } from './features/clientSlice'
+import { openCreateClient, selectOpenClient, changeToAdd } from './features/clientSlice'
 import { db } from './firebase';
 
 function ClientList() {
@@ -49,22 +49,21 @@ function ClientList() {
                     >
                     </input>
                 </div>
-                <div className="clientHeader2">
+                <div className="clientHeader">
                     <p style={{ marginLeft: '20px' }}>Clientes</p>
-                    {/* <div className="clientNameHeader"> */}
                     <p style={{ fontSize: '14px', color: 'lightblue', textTransform: "none", margin: '0' }}>
                         {selectedClient?.Name}</p>
-                    {/* </div> */}
 
                     <IconButton className="">
                         <div className="" >
-                            <AddCircleIcon onClick={addClient} className="addPartIcon" />
+                            <AddCircleIcon
+                                onClick={addClient}
+                                className="addClientIcon" />
                         </div>
                     </IconButton>
 
                 </div>
             </div>
-            {/* <div className="clientes2List"> */}
             <div className="clientListRows2">
                 {clients.filter(c => c.data.clientName.includes(filter)).map(({ id, data: { clientName, dir1, dir2, dir3, rfc, timestamp }
                 }) => (
@@ -79,11 +78,9 @@ function ClientList() {
                         time={new Date(timestamp?.seconds * 1000).toUTCString()}
                     />
                 ))}
-                {/* </div> */}
             </div>
         </div>
     )
 }
-// import './Clientes2.css'
 
 export default ClientList
