@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Receipts.css'
 import { Button } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
+import firebase from 'firebase'
 import { db } from './firebase';
 
 function Receipts() {
@@ -119,28 +120,52 @@ function Receipts() {
         // document.getElementById(e.target.id).style.cssText = "border: 1px solid #25cc88"
         document.getElementById(e.target.id).classList.add('borderGreen')
     }
+    const onSubmit = (formData) => {
+        // alert("on submit")
+        console.log(formData)
+        db.collection('receipts').add({
+            warehouse: formData.bodega,
+            zone: formData.zona,
+            client: formData.cliente,
+            carrier: formData.carrier,
+            supplier: formData.proveedor,
+            bill: formData.bill,
+            part: formData.parte,
+            qty: formData.cantidad,
+            uomq: formData.uomq,
+            weight: formData.peso,
+            uomw: formData.uomp,
+            notes: formData.notas,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        alert("record saved")
+        // dispatch(closeCreateClient())
+    }
 
     return (
         <div className="receipts">
             <div className="header">
                 <h1>Recibos</h1>
             </div>
-            <form className="container">
+            <form className="container" onSubmit={handleSubmit(onSubmit)}>
                 <div className="containerHeader">
                     <div className="col1" >
                         <div className="combo">
                             <div className="izq">
                                 <p>Bodega</p>
-                                <select id="selectBodega" onChange={bodegaChange}
-                                    ref={register({ required: true })}
-                                >
-                                    <option value="" disabled selected > Elegir Bodega</option>
-                                    {warehouses.map(({ id, data: { whsName, }
-                                    }) => (
-                                        <option value={id}>{whsName.substr(0, 25)}</option>
-                                    ))}
-                                </select>
-
+                                <div className="checkError">
+                                    <select id="selectBodega" onChange={bodegaChange}
+                                        ref={register({ required: true })}
+                                        name="bodega"
+                                    >
+                                        <option value="" disabled selected > Elegir Bodega</option>
+                                        {warehouses.map(({ id, data: { whsName, }
+                                        }) => (
+                                            <option value={id}>{whsName.substr(0, 25)}</option>
+                                        ))}
+                                    </select>
+                                    {/* {errors.bodega && <p className="createClient__error">Campo Requerido...</p>} */}
+                                </div>
                             </div>
                             <div className="der">
                             </div>
@@ -149,6 +174,8 @@ function Receipts() {
                             <div className="izq">
                                 <p>Zona</p>
                                 <select id="selectZona" onChange={selectChange}
+                                    ref={register({ required: true })}
+                                    name="zona"
                                 >
                                     <option value="" disabled selected > Elegir Locación</option>
                                     {zones.filter(c => c.data.whsId.includes(filterZ)).map(({ id, data: { zoneName, }
@@ -163,7 +190,10 @@ function Receipts() {
                         <div className="combo">
                             <div className="izq">
                                 <p>Cliente</p>
-                                <select id="selectCliente" onChange={clientChange}>
+                                <select id="selectCliente" onChange={clientChange}
+                                    name="cliente"
+                                    ref={register({ required: true })}
+                                >
                                     <option value="" disabled selected > Elegir Cliente</option>
                                     {clients.map(({ id, data: { clientName, }
                                     }) => (
@@ -177,7 +207,10 @@ function Receipts() {
                         <div className="combo">
                             <div className="izq">
                                 <p>Proveedor</p>
-                                <select id="selectProveedor" onChange={selectChange}>
+                                <select id="selectProveedor" onChange={selectChange}
+                                    ref={register({ required: true })}
+                                    name="proveedor"
+                                >
                                     <option value="" disabled selected > Elegir Proveedor</option>
                                     {suppliers.map(({ id, data: { name, }
                                     }) => (
@@ -191,14 +224,16 @@ function Receipts() {
                         <div className="combo">
                             <div className="izq">
                                 <p>Carrier Level</p>
-                                <select id="selectCarrier" onChange={selectChange}>
+                                <select id="selectCarrier" onChange={selectChange}
+                                    name="carrier"
+                                    ref={register({ required: true })}
+                                >
                                     <option value="" disabled selected > Elegir Carrier</option>
                                     {carriers.map(({ id, data: { name, }
                                     }) => (
                                         <option value={id}>{name?.substr(0, 25)}</option>
                                     ))}
                                 </select>
-
                             </div>
                             <div className="der">
                             </div>
@@ -206,7 +241,10 @@ function Receipts() {
                         <div className="combo">
                             <div className="izq">
                                 <p>Bill of Lading</p>
-                                <input type="text" placeholder="Introducir número" className="opcional" />
+                                <input type="text" placeholder="Introducir número" className="opcional"
+                                    name="bill"
+                                    ref={register({ required: false })}
+                                />
                             </div>
                         </div>
                     </div>
@@ -215,7 +253,10 @@ function Receipts() {
                     <div className="detCol1">
                         <div className="combo">
                             <div className="izq"><p>Parte</p></div>
-                            <select id="selectParte" onChange={selectChange}>
+                            <select id="selectParte" onChange={selectChange}
+                                name="parte"
+                                ref={register({ required: true })}
+                            >
                                 <option value="" disabled selected > Elegir Parte</option>
                                 {parts.filter(c => c.data.clientId.includes(filterP)).map(({ id, data: { partName, }
                                 }) => (
@@ -226,10 +267,17 @@ function Receipts() {
                         <div className="combo">
                             <div className="izq">
                                 <p>Cantidad</p>
-                                <input id="cantidad" placeholder="???" type="text" style={{ width: "3rem" }} onChange={selectChange} />
+                                <input id="cantidad" placeholder="???" type="text" style={{ width: "3rem" }}
+                                    name="cantidad"
+                                    onChange={selectChange}
+                                    ref={register({ required: true })}
+                                />
                             </div>
                             <div className="der">
-                                <select id="selectUOMqty" onChange={selectChange} style={{ width: "4rem" }}>
+                                <select id="selectUOMqty" onChange={selectChange} style={{ width: "4rem" }}
+                                    name="uomq"
+                                    ref={register({ required: true })}
+                                >
                                     <option value="" disabled selected >UOM</option>
                                     {uoms.filter(c => c.data.type.includes('qty')).map(({ id, data: { name, }
                                     }) => (
@@ -240,7 +288,10 @@ function Receipts() {
                         </div>
                         <div className="combo">
                             <div className="izq"><p>Condición</p></div>
-                            <select id="selectCondicion" onChange={selectChange} >
+                            <select id="selectCondicion" onChange={selectChange}
+                                name="condicion"
+                                ref={register({ required: true })}
+                            >
                                 <option value="1" selected disabled>Elegir Condición</option>
                                 <option value="1">Good</option>
                                 <option value="2">Bad</option>
@@ -249,10 +300,16 @@ function Receipts() {
                         <div className="combo">
                             <div className="izq">
                                 <p>Peso</p>
-                                <input id="qtyPeso" onChange={selectChange} placeholder="???" type="text" style={{ width: "3rem" }} />
+                                <input id="qtyPeso" onChange={selectChange} placeholder="???" type="text" style={{ width: "3rem" }}
+                                    name="peso"
+                                    ref={register({ required: true })}
+                                />
                             </div>
                             <div className="der">
-                                <select id="selectUOMweight" onChange={selectChange} style={{ width: "4rem" }}>
+                                <select id="selectUOMweight" onChange={selectChange} style={{ width: "4rem" }}
+                                    name="uomp"
+                                    ref={register({ required: true })}
+                                >
                                     <option value="" disabled selected >UOM</option>
                                     {uoms.filter(c => c.data.type.includes('weight')).map(({ id, data: { name, }
                                     }) => (
@@ -264,7 +321,9 @@ function Receipts() {
                     </div>
                     <div className="detCol2">
                         <h3>Notas</h3>
-                        <textarea placeholder="Notas opcionales" name="" id="" cols="30" rows="10"></textarea>
+                        <textarea placeholder="Notas opcionales" name="notas" id="" cols="30" rows="10"
+                            ref={register({ required: true })}
+                        ></textarea>
                     </div>
                 </div>
                 <div className="createClient__options">
@@ -273,7 +332,6 @@ function Receipts() {
                         // variant="contained"
                         color="primary"
                         type="submit"
-                    // style={{ color: "white", }}
                     >
                         Guardar
                 </Button>

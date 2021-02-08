@@ -65,7 +65,7 @@
 .createClient__error{
     /* background-color: #ff7aa8; */
     color:red;
-    text-align: right;
+    text-align: center;
     margin:0;
     padding: 1px; 
     font-size: smaller;

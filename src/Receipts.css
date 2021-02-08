@@ -143,7 +143,7 @@ select option:first-child {
     color: white !important;
 }
 
-.izq > select, .der > select, .combo > select, .col2 > select {
+.izq > select, .der > select, .combo > select, .col2 > select, .checkError>select {
     margin-left: 15px;
     /* border: 2px solid #25cc88 ; */
     border: 2px solid red ;
