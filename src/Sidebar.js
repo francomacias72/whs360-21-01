@@ -32,7 +32,7 @@ function Sidebar() {
                 {/* <div onClick={() => history.push("/part")}><SidebarOption Icon={ViewHeadlineIcon} title="Partes" number={4} color={"#4caf50"} /></div> */}
                 <div onClick={() => history.push("/bodegas")}><SidebarOption Icon={StoreIcon} title="Bodegas/Locaciones" number={2} color={"#fd7e14"} /></div>
                 <SidebarOption Icon={AccountTreeIcon} title="Inventarios" number={2} color={"#6c757d"} />
-                <SidebarOption Icon={ReceiptIcon} title="Recibos" number={25} color={"#17a2b8"} />
+                <div onClick={() => history.push("/recibos")}><SidebarOption Icon={ReceiptIcon} title="Recibos" number={25} color={"#17a2b8"} /></div>
                 <SidebarOption Icon={LocalShippingIcon} title="Embarques" number={2} color={"#e83e8c"} />
                 <SidebarOption Icon={ImportExportIcon} title="Exportaciones" number={2} color={"#4caf50"} />
                 <SidebarOption Icon={AssessmentIcon} title="Reportes" number={2} color={"#007bff"} />

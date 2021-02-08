@@ -16,16 +16,20 @@ function ClientList() {
     const [filter, setFilter] = useState('')
 
     useEffect(() => {
-        db.collection('clients')
+        db.collection("clients")
             .orderBy('clientName', 'asc')
-            .onSnapshot(snapshot =>
+            // .where("capital", "==", true)
+            .get()
+            .then(snapshot =>
                 setClients(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
     }, [])
 
     function filterChange(e) {

@@ -16,16 +16,20 @@ function PartList() {
     const [filterP, setFilterP] = useState('')
 
     useEffect(() => {
-        db.collection('parts')
+        db.collection("parts")
             .orderBy('partName', 'asc')
-            .onSnapshot(snapshot =>
+            // .where("capital", "==", true)
+            .get()
+            .then(snapshot =>
                 setParts(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
     }, [])
 
     function filterChangeP(e) {

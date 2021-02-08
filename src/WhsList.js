@@ -16,16 +16,20 @@ function WhsList() {
     const [filter, setFilter] = useState('')
 
     useEffect(() => {
-        db.collection('warehouses')
+        db.collection("warehouses")
             .orderBy('whsName', 'asc')
-            .onSnapshot(snapshot =>
+            // .where("capital", "==", true)
+            .get()
+            .then(snapshot =>
                 setWhs(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
     }, [])
 
 

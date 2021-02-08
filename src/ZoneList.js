@@ -17,16 +17,19 @@ function ZoneList() {
     console.log("Select WHS: ", selectedWhs)
 
     useEffect(() => {
-        db.collection('zones')
+        db.collection("zones")
             .orderBy('zoneName', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setZones(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
     }, [])
 
     function filterChangeZ(e) {

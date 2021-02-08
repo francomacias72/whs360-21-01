@@ -34,77 +34,97 @@ function Receipts() {
 
     useEffect(() => {
         getDoc()
-        db.collection('clients')
+        db.collection("clients")
             .orderBy('clientName', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setClients(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
-        db.collection('warehouses')
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        db.collection("warehouses")
             .orderBy('whsName', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setWarehouses(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
-        // setFilterZ(warehouses.slice(0, 1).shift().id)
-        db.collection('zones')
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        db.collection("zones")
             .orderBy('zoneName', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setZones(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
-        db.collection('suppliers')
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        db.collection("suppliers")
             .orderBy('name', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setSuppliers(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
-        db.collection('carriers')
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        db.collection("carriers")
             .orderBy('name', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setCarriers(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
-        db.collection('parts')
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        db.collection("parts")
             .orderBy('partName', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setParts(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
-        db.collection('uoms')
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        db.collection("uoms")
             .orderBy('name', 'asc')
-            .onSnapshot(snapshot =>
+            .get()
+            .then(snapshot =>
                 setUOMs(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
-                )
-            )
+                ))
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
     }, [])
 
     function bodegaChange(e) {
