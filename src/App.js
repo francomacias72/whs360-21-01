@@ -40,6 +40,7 @@ function App() {
 
         <div className="app__body">
           <Header />
+
           <Switch>
             <Route path="/client">
               <Client />
