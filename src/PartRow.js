@@ -69,31 +69,17 @@ function PartRow({ Id, Name, desc, model, nom, coo, clientId }) {
         );
         dispatch(changeToEditP())
         dispatch(openCreatePart())
-        // if (selectedClient?.Id) {
-        //    dispatch(changeToEdit())
-        //    dispatch(openCreateClient())    
-        // }
     }
 
-    // console.log("selected id: ", selectedClient?.Id)
-    // console.log("clientId: ", clientId)
     if (selectedClient?.Id === clientId) {
         return (
-
             <div className="partRow">
-                <div className="partRowIcons">
-                    {/* <IconButton className="partRowIconsColor">
-                        <div onClick={openPart} className="editIcon">
-                            <ListAltIcon className="partRowEditIcon" />
-                        </div>
-                    </IconButton> */}
+                <div className="partRowIcons">                   
                     <IconButton>
-                        {/* <div className="" > */}
                         <EditIcon
                             className="clientDetailsEditIcon"
                             onClick={() => editPart(selectedPart?.Id)}
                         />
-                        {/* </div> */}
                     </IconButton>
                     <IconButton className="partRowIconsColor">
                         <div className="deleteIcon" onClick={deletePart}>
@@ -102,11 +88,8 @@ function PartRow({ Id, Name, desc, model, nom, coo, clientId }) {
 
                         </div>
                     </IconButton>
-
                 </div>
-                {/* <div className="partRowId">{Id}</div> */}
                 <div className="partRowName"><strong>{Name}</strong> {" - " + desc.substring(0, 30) + "..."}</div>
-                {/* <div className="partRowDescription">{Description}</div> */}
             </div>
         )
     }
