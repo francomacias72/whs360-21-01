@@ -8,37 +8,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom"
-import JsBarcode from "jsbarcode"
-// import { jsPDF } from "jspdf";
-
-// const doc = new jsPDF();
-
-// doc.text("Hello world!", 10, 10);
-// doc.save("a4.pdf");
-// alert("document generated")
-// window.setTimeout(function () { JsBarcode("#barcode", "Hi!"); }, 100)
-
-
-// import { jsPDF } from 'jspdf'
-// import 'svg2pdf.js'
-
-// const doc = new jsPDF()
-// const x = 0, y = 0, width = 200, height = 100
-
-// JsBarcode("#barcode", "franco");
-
-// const element = document.getElementById('svg')
-// doc
-//     .svg(element, {
-//         x,
-//         y,
-//         width,
-//         height
-//     })
-//     .then(() => {
-//         // save the created pdf
-//         doc.save('myPDF.pdf')
-//     })
+import { useDispatch, useSelector } from 'react-redux'
+import { saveReceipt, getSavedReceipt, saveOrderId } from './features/receiptSlice'
+import { useBarcode } from 'react-barcodes';
+import { jsPDF } from 'jspdf'
+import 'svg2pdf.js'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -65,6 +39,31 @@ function Receipts() {
     const [uoms, setUOMs] = useState([])
     const [filterP, setFilterP] = useState([])
     const [orderNumber, setOrderNumber] = useState([])
+    const dispatch = useDispatch()
+    const savedReceipt = useSelector(getSavedReceipt)
+    const [receipt, setReceipt] = useState()
+
+
+    function crearPDF() {
+        const doc = new jsPDF()
+        const x = 0, y = 0, width = 200, height = 100
+        const element = document.getElementById('svg')
+        doc
+            .svg(element, {
+                x,
+                y,
+                width,
+                height
+            })
+            .then(() => {
+                doc.save('myPDF.pdf')
+            })
+    }
+    const { inputRef } = useBarcode({
+        value: receipt?.id,
+        options: {
+        }
+    });
 
 
     const classes = useStyles();
@@ -94,6 +93,14 @@ function Receipts() {
         snapshot = query.docs[0];
         data = snapshot.id;
         setFilterP(data)
+    }
+
+    async function getOrderId() {
+        let query = await db.collection('receipts').orderBy('orderId', 'desc').limit(1).get();
+        let snapshot = query.docs[0].data();
+        let data = snapshot;
+        console.log("New order id:", data.orderId + 1)
+        return data.orderId + 1;
     }
 
 
@@ -195,7 +202,6 @@ function Receipts() {
 
     function bodegaChange(e) {
         setFilterZ(e.target.value)
-        // console.log(e)
         selectChange(e)
     }
     function clientChange(e) {
@@ -203,8 +209,6 @@ function Receipts() {
         selectChange(e)
     }
     function selectChange(e) {
-        // console.log(e.target.value)
-        // document.getElementById(e.target.id).style.cssText = "border: 1px solid #25cc88"
         document.getElementById(e.target.id).classList.add('borderGreen')
     }
     const onSubmit = (formData) => {
@@ -215,47 +219,75 @@ function Receipts() {
             clientName = doc.data().clientName
         })
         docRef = db.collection("warehouses").doc(formData.bodega)
-        docRef.get().then((doc) => {
-            whsName = doc.data().whsName
-            db.collection('receipts').add({
-                warehouse: whsName,
-                zone: formData.zona,
-                client: clientName,
-                carrier: formData.carrier,
-                supplier: formData.proveedor,
-                poNumber: formData.po,
-                clientReference: formData.cr,
-                bill: formData.bill,
-                part: formData.parte,
-                qty: formData.cantidad,
-                uomq: formData.uomq,
-                weight: formData.peso,
-                uomw: formData.uomp,
-                notes: formData.notas,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            })
-                .then((docRef) => {
-                    handleOpen()
-                    setOrderNumber(docRef.id)
-                    console.log("Document written with ID: ", docRef.id);
-                    window.setTimeout(() => { history.push("/") }, 2000)
-                    // history.push("/")
+        // console.log('LINEA 1')
+        // console.log('LINEA 2')
+        // console.log(newOrderId ? 'si hay' : 'no hay')
+        // console.log('LINEA 3')
+        const newOrderId = getOrderId().then((orden) => {
+            docRef.get().then((doc) => {
+                whsName = doc.data().whsName
+                db.collection('receipts').add({
+                    orderId: orden,
+                    warehouse: whsName,
+                    zone: formData.zona,
+                    client: clientName,
+                    carrier: formData.carrier,
+                    supplier: formData.proveedor,
+                    poNumber: formData.po,
+                    clientReference: formData.cr,
+                    bill: formData.bill,
+                    part: formData.parte,
+                    qty: formData.cantidad,
+                    uomq: formData.uomq,
+                    weight: formData.peso,
+                    uomw: formData.uomp,
+                    notes: formData.notas,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
-                .catch((error) => {
-                    console.error("Error adding document: ", error);
-                });
+                    .then((docRef) => {
+                        handleOpen()
+                        setOrderNumber(docRef.id)
+                        dispatch(saveReceipt({
+                            id: docRef.id,
+                            orderId: orden,
+                            warehouse: whsName,
+                            zone: formData.zona,
+                            client: clientName,
+                            carrier: formData.carrier,
+                            supplier: formData.proveedor,
+                            poNumber: formData.po,
+                            clientReference: formData.cr,
+                            bill: formData.bill,
+                            part: formData.parte,
+                            qty: formData.cantidad,
+                            uomq: formData.uomq,
+                            weight: formData.peso,
+                            uomw: formData.uomp,
+                            notes: formData.notas,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        }))
+                        //dispatch(saveReceipt())
+                        // console.log("Document written with ID: ", docRef.id);
+                        // console.log("mando llamar pdf del save")
+                        // crearPDF();
+                        // console.log("linea posterior a crearPDF en save")
+                        window.setTimeout(() => { history.push("/etiqueta") }, 2000)
+                        // history.push("/")
+                    })
+                    .catch((error) => {
+                        console.error("Error creating Receipt: ", error);
+                    });
+            })
         })
-        // whsName = db.collection("warehouses").doc(formData.bodega);
+        console.log("New Order ID: ", newOrderId)
 
-        //alert("record saved")
-        // handleOpen(docRef.id)
     }
 
     return (
         <div className="receipts">
             <div className="header">
                 <h1>Recibos</h1>
-                <svg id="barcode"></svg>
+                <div className="" style={{ visibility: "visible" }}> <svg id="svg" ref={inputRef} /> </div>
             </div>
             <form className="container" onSubmit={handleSubmit(onSubmit)}>
                 <div className="containerHeader">
