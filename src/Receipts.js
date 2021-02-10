@@ -8,6 +8,37 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom"
+import JsBarcode from "jsbarcode"
+// import { jsPDF } from "jspdf";
+
+// const doc = new jsPDF();
+
+// doc.text("Hello world!", 10, 10);
+// doc.save("a4.pdf");
+// alert("document generated")
+// window.setTimeout(function () { JsBarcode("#barcode", "Hi!"); }, 100)
+
+
+// import { jsPDF } from 'jspdf'
+// import 'svg2pdf.js'
+
+// const doc = new jsPDF()
+// const x = 0, y = 0, width = 200, height = 100
+
+// JsBarcode("#barcode", "franco");
+
+// const element = document.getElementById('svg')
+// doc
+//     .svg(element, {
+//         x,
+//         y,
+//         width,
+//         height
+//     })
+//     .then(() => {
+//         // save the created pdf
+//         doc.save('myPDF.pdf')
+//     })
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -34,6 +65,7 @@ function Receipts() {
     const [uoms, setUOMs] = useState([])
     const [filterP, setFilterP] = useState([])
     const [orderNumber, setOrderNumber] = useState([])
+
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -223,6 +255,7 @@ function Receipts() {
         <div className="receipts">
             <div className="header">
                 <h1>Recibos</h1>
+                <svg id="barcode"></svg>
             </div>
             <form className="container" onSubmit={handleSubmit(onSubmit)}>
                 <div className="containerHeader">

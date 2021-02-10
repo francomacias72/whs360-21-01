@@ -24,6 +24,7 @@ import ClientPart from './ClientPart';
 import AddEditWhs from './AddEditWhs';
 import AddEditZone from './AddEditZone';
 import Receipts from './Receipts';
+import Etiqueta from './Etiqueta';
 
 
 function App() {
@@ -53,6 +54,9 @@ function App() {
             </Route>
             <Route path="/recibos">
               <Receipts />
+            </Route>
+            <Route path="/etiqueta">
+              <Etiqueta />
             </Route>
             <Route path="/">
               <ClientPart />

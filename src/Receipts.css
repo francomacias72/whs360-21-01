@@ -1,12 +1,6 @@
-.receipts > * {
-    /* border: 1px solid white; */
-    /* display: flex; */
-    /* justify-content: center; */
-
-}
 .receipts {
     /* border: 1px solid white; */
-    width: 78vw;
+    width: 80vw;
     padding: 0;
     margin-left:20px;
     background-color: #202940;
@@ -61,7 +55,7 @@
 }
 
 .col1, .col2, .col3 {
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 
@@ -74,8 +68,8 @@
 }
 
 .details {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-bottom: 20px;
     display:flex;
     /* justify-content: space-between; */
@@ -102,7 +96,7 @@
 .izq > p {
     text-align: right;
     width: 100px;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 .der {
     /* margin-left: 20px; */
@@ -139,7 +133,7 @@ select option:first-child {
 }
 
 .izq > input{
-    margin-left: 15px;
+    margin-left: 10px;
     height: 2rem;
     border: 2px solid red ;
     background-color: transparent;
@@ -149,7 +143,7 @@ select option:first-child {
 }
 
 .izq > select, .der > select, .combo > select, .col2 > select, .checkError>select {
-    margin-left: 15px;
+    margin-left: 10px;
     /* border: 2px solid #25cc88 ; */
     border: 2px solid red ;
     background-color: transparent;
