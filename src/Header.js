@@ -4,8 +4,19 @@ import './Header.css'
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from "@material-ui/icons/Notifications"
 import AppsIcon from '@material-ui/icons/Apps';
+import { useSelector, useDispatch } from "react-redux"
+import { logout, selectUser } from './features/userSlice';
+import { auth } from './firebase'
 
 function Header() {
+    const user = useSelector(selectUser)
+    const dispatch = useDispatch()
+
+    const signOut = () => {
+        auth.signOut().then(() => {
+            dispatch(logout())
+        })
+    }
     return (
         <div className='header'>
             <div className="headerTitle">
@@ -24,7 +35,7 @@ function Header() {
                 <IconButton>
                     <NotificationsIcon className="header__iconColor" />
                 </IconButton>
-                <Avatar className="header__avatar" />
+                <Avatar src={user?.photoUrl} className="header__avatar" onClick={signOut} />
             </div>
         </div>
     )

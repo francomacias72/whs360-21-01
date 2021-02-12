@@ -25,6 +25,8 @@ import AddEditWhs from './AddEditWhs';
 import AddEditZone from './AddEditZone';
 import Receipts from './Receipts';
 import Etiqueta from './Etiqueta';
+import { login, selectUser } from './features/userSlice';
+import Login from './Login'
 
 
 function App() {
@@ -32,43 +34,64 @@ function App() {
   const createPartIsOpen = useSelector(selectCreatePartIsOpen)
   const createWhsIsOpen = useSelector(selectCreateWhsIsOpen)
   const createZoneIsOpen = useSelector(selectCreateZoneIsOpen)
+  const user = useSelector(selectUser)
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        //the user is logged in
+        dispatch(login({
+          displayName: user.displayName,
+          email: user.email,
+          photoUrl: user.photoURL,
+        }))
+      }
+      else {
+        //user is logged out
+      }
+    })
+  }, [])
 
   return (
     <Router>
-      <div className="app">
-        <Sidebar />
+      {!user ? (
+        <Login />
+      ) : (
+          <div className="app">
+            <Sidebar />
 
-        <div className="app__body">
-          <Header />
+            <div className="app__body">
+              <Header />
 
-          <Switch>
-            <Route path="/client">
-              <Client />
-            </Route>
-            <Route path="/clientes">
-              <ClientPart />
-            </Route>
-            <Route path="/bodegas">
-              <WhsZone />
-            </Route>
-            <Route path="/recibos">
-              <Receipts />
-            </Route>
-            <Route path="/etiqueta">
-              <Etiqueta />
-            </Route>
-            <Route path="/">
-              <ClientPart />
-            </Route>
-          </Switch>
-        </div>
+              <Switch>
+                <Route path="/client">
+                  <Client />
+                </Route>
+                <Route path="/clientes">
+                  <ClientPart />
+                </Route>
+                <Route path="/bodegas">
+                  <WhsZone />
+                </Route>
+                <Route path="/recibos">
+                  <Receipts />
+                </Route>
+                <Route path="/etiqueta">
+                  <Etiqueta />
+                </Route>
+                <Route path="/">
+                  <ClientPart />
+                </Route>
+              </Switch>
+            </div>
 
-        {createClientIsOpen && <AddEditClient />}
-        {createPartIsOpen && <AddEditPart />}
-        {createWhsIsOpen && <AddEditWhs />}
-        {createZoneIsOpen && <AddEditZone />}
-      </div>
+            {createClientIsOpen && <AddEditClient />}
+            {createPartIsOpen && <AddEditPart />}
+            {createWhsIsOpen && <AddEditWhs />}
+            {createZoneIsOpen && <AddEditZone />}
+          </div>
+        )}
     </Router>
   );
 }

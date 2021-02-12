@@ -10,9 +10,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { saveReceipt, getSavedReceipt, saveOrderId } from './features/receiptSlice'
+import { selectUser } from './features/userSlice'
 import { useBarcode } from 'react-barcodes';
 import { jsPDF } from 'jspdf'
 import 'svg2pdf.js'
+import { NoteTwoTone } from '@material-ui/icons'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -42,6 +44,7 @@ function Receipts() {
     const dispatch = useDispatch()
     const savedReceipt = useSelector(getSavedReceipt)
     const [receipt, setReceipt] = useState()
+    const user = useSelector(selectUser);
 
 
     function crearPDF() {
@@ -223,6 +226,7 @@ function Receipts() {
         // console.log('LINEA 2')
         // console.log(newOrderId ? 'si hay' : 'no hay')
         // console.log('LINEA 3')
+        const d = new Date()
         const newOrderId = getOrderId().then((orden) => {
             docRef.get().then((doc) => {
                 whsName = doc.data().whsName
@@ -243,6 +247,8 @@ function Receipts() {
                     uomw: formData.uomp,
                     notes: formData.notas,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    recTimestamp: d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
+                    user: user?.email,
                 })
                     .then((docRef) => {
                         handleOpen()
@@ -265,6 +271,8 @@ function Receipts() {
                             uomw: formData.uomp,
                             notes: formData.notas,
                             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            recTimestamp: d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
+                            user: user?.email,
                         }))
                         //dispatch(saveReceipt())
                         // console.log("Document written with ID: ", docRef.id);
