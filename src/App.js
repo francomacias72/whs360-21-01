@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -7,15 +7,15 @@ import {
 } from "react-router-dom";
 import Sidebar from './Sidebar'
 import Header from './Header'
-import Body from './Body'
 // import CreateClient from './CreateClient'
 import AddEditClient from './AddEditClient'
-import { selectCreateClientIsOpen } from './features/clientSlice'
+import { selectCreateClientIsOpen, fillListClients, selectListClients } from './features/clientSlice'
 import { selectCreatePartIsOpen } from './features/partSlice'
 import { selectCreateWhsIsOpen } from './features/whsSlice'
 import { selectCreateZoneIsOpen } from './features/zoneSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { auth } from './firebase';
+// import firebase from 'firebase'
+import { auth, db } from './firebase';
 import Client from './Client';
 // import Part from './Part2';
 import AddEditPart from './AddEditPart'
@@ -27,6 +27,7 @@ import Receipts from './Receipts';
 import Etiqueta from './Etiqueta';
 import { login, selectUser } from './features/userSlice';
 import Login from './Login'
+import Dashboard from './components/Dashboard';
 
 
 function App() {
@@ -34,10 +35,38 @@ function App() {
   const createPartIsOpen = useSelector(selectCreatePartIsOpen)
   const createWhsIsOpen = useSelector(selectCreateWhsIsOpen)
   const createZoneIsOpen = useSelector(selectCreateZoneIsOpen)
+  const [clients, setClients] = useState([])
   const user = useSelector(selectUser)
   const dispatch = useDispatch();
+  // const createListClients = useSelector()
 
   useEffect(() => {
+    //**************** */
+    db.collection("clients")
+      .orderBy('clientName', 'asc')
+      .get()
+      .then(snapshot =>
+        dispatch(fillListClients(snapshot.docs.map(doc => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+        )))
+      .catch((error) => {
+        console.log("Error getting clients: ", error);
+      })
+    // db.collection('clients')
+    //   .orderBy('clientName', 'asc')
+    //   .onSnapshot(snapshot =>
+    //     setClients(
+    //       snapshot.docs.map(doc => ({
+    //         id: doc.id,
+    //         data: doc.data(),
+    //       }))
+    //     )
+    //   )
+    // console.log("Clients APP: ", clients)
+    // dispatch(fillListClients(clients))
+    //*********************************** */
     auth.onAuthStateChanged(user => {
       if (user) {
         //the user is logged in
@@ -63,10 +92,12 @@ function App() {
 
             <div className="app__body">
               <Header />
-
               <Switch>
+                <Route path="/dashboard">
+                  <Dashboard />
+                </Route>
                 <Route path="/client">
-                  <Client />
+                  <ClientPart />
                 </Route>
                 <Route path="/clientes">
                   <ClientPart />
@@ -81,7 +112,7 @@ function App() {
                   <Etiqueta />
                 </Route>
                 <Route path="/">
-                  <ClientPart />
+                  <Dashboard />
                 </Route>
               </Switch>
             </div>

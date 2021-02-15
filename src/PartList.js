@@ -6,7 +6,7 @@ import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { useDispatch, useSelector } from 'react-redux'
 import { selectOpenClient, } from './features/clientSlice'
-import { openCreatePart, changeToAddP } from './features/partSlice'
+import { openCreatePart, changeToAddP, fillListParts, selectListParts } from './features/partSlice'
 import { db } from './firebase';
 
 function PartList() {
@@ -14,23 +14,22 @@ function PartList() {
     const selectedClient = useSelector(selectOpenClient)
     const [parts, setParts] = useState([])
     const [filterP, setFilterP] = useState('')
+    const parts2 = useSelector(selectListParts)
 
-    useEffect(() => {
-        db.collection("parts")
-            .orderBy('partName', 'asc')
-            // .where("capital", "==", true)
-            .get()
-            .then(snapshot =>
-                setParts(
-                    snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                ))
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-    }, [])
+    // useEffect(() => {
+    //     db.collection('parts')
+    //         .orderBy('partName', 'asc')
+    //         .onSnapshot(snapshot =>
+    //             setParts(
+    //                 snapshot.docs.map(doc => ({
+    //                     id: doc.id,
+    //                     data: doc.data(),
+    //                 }))
+    //             )
+    //         )
+    // }, [])
+    // dispatch(fillListParts(parts))
+
 
     function filterChangeP(e) {
         setFilterP(e.target.value)
@@ -67,7 +66,7 @@ function PartList() {
             </div>
             <div className="clientes2List">
                 <div className="clientListRows2">
-                    {parts.filter(c => c.data.partName.includes(filterP)).map(({ id, data: { partName, desc, model, nom, coo, clientId, timestamp }
+                    {parts2.filter(c => c.data.partName.includes(filterP)).map(({ id, data: { partName, desc, model, nom, coo, clientId, timestamp }
                     }) => (
                         <PartRow
                             Id={id}

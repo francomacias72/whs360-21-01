@@ -5,7 +5,7 @@ import WhsRow from './WhsRow'
 import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { useDispatch, useSelector } from 'react-redux'
-import { openCreateWhs, selectOpenWhs, changeToAddW } from './features/whsSlice'
+import { openCreateWhs, selectOpenWhs, changeToAddW, fillListWhss } from './features/whsSlice'
 import { db } from './firebase';
 
 function WhsList() {
@@ -18,19 +18,15 @@ function WhsList() {
     useEffect(() => {
         db.collection("warehouses")
             .orderBy('whsName', 'asc')
-            // .where("capital", "==", true)
-            .get()
-            .then(snapshot =>
+            .onSnapshot(snapshot =>
                 setWhs(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
                     }))
                 ))
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
     }, [])
+    dispatch(fillListWhss(warehouses))
 
 
     function filterChangeW(e) {

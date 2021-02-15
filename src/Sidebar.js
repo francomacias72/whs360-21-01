@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Sidebar.css'
 import logo from './360logo.png'
 import PersonIcon from '@material-ui/icons/Person';
 import SidebarOption from './SidebarOption'
-import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import StoreIcon from '@material-ui/icons/Store';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
@@ -11,15 +10,14 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import { useHistory } from "react-router-dom"
-
+import { db } from './firebase';
+import { useDispatch, useSelector } from 'react-redux'
+import { fillListClients } from './features/clientSlice'
 
 
 function Sidebar() {
     const history = useHistory()
 
-    function alerta() {
-        history.push("/client")
-    }
 
     return (
         <div className='sidebar'>
@@ -28,7 +26,7 @@ function Sidebar() {
                 <h1>WHS 360</h1>
             </div>
             <div className="sidebarOptions">
-                <div onClick={() => history.push("/client")}> <SidebarOption Icon={PersonIcon} title="Clientes/Partes" number={5} color={"#A53AB7"} /> </div>
+                <div onClick={() => history.push("/clientes")}> <SidebarOption Icon={PersonIcon} title="Clientes/Partes" number={5} color={"#A53AB7"} /> </div>
                 {/* <div onClick={() => history.push("/part")}><SidebarOption Icon={ViewHeadlineIcon} title="Partes" number={4} color={"#4caf50"} /></div> */}
                 <div onClick={() => history.push("/bodegas")}><SidebarOption Icon={StoreIcon} title="Bodegas/Locaciones" number={2} color={"#fd7e14"} /></div>
                 <SidebarOption Icon={AccountTreeIcon} title="Inventarios" number={2} color={"#6c757d"} />

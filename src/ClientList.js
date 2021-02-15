@@ -5,32 +5,29 @@ import ClientRow from './ClientRow'
 import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { useDispatch, useSelector } from 'react-redux'
-import { openCreateClient, selectOpenClient, changeToAdd } from './features/clientSlice'
+import { openCreateClient, selectOpenClient, changeToAdd, selectListClients, fillListClients } from './features/clientSlice'
 import { db } from './firebase';
 
 function ClientList() {
     const dispatch = useDispatch()
     const selectedClient = useSelector(selectOpenClient)
-
-    const [clients, setClients] = useState([])
+    // const [clients, setClients] = useState([])
     const [filter, setFilter] = useState('')
+    const clients = useSelector(selectListClients)
 
     useEffect(() => {
-        db.collection("clients")
-            .orderBy('clientName', 'asc')
-            // .where("capital", "==", true)
-            .get()
-            .then(snapshot =>
-                setClients(
-                    snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                ))
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
+        // db.collection('clients')
+        //     .orderBy('clientName', 'asc')
+        //     .onSnapshot(snapshot =>
+        //         setClients(
+        //             snapshot.docs.map(doc => ({
+        //                 id: doc.id,
+        //                 data: doc.data(),
+        //             }))
+        //         )
+        //     )
     }, [])
+    // dispatch(fillListClients(clients))
 
     function filterChange(e) {
         setFilter(e.target.value)

@@ -15,6 +15,10 @@ import { useBarcode } from 'react-barcodes';
 import { jsPDF } from 'jspdf'
 import 'svg2pdf.js'
 import { NoteTwoTone } from '@material-ui/icons'
+import { selectListClients } from './features/clientSlice'
+import { selectListParts } from './features/partSlice'
+import { selectListWhss } from './features/whsSlice'
+import { selectListZones } from './features/zoneSlice'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -31,13 +35,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Receipts() {
     const history = useHistory()
-    const [clients, setClients] = useState([])
-    const [warehouses, setWarehouses] = useState([])
-    const [zones, setZones] = useState([])
+    // const [clients, setClients] = useState([])
+    const clients = useSelector(selectListClients)
+    // const [warehouses, setWarehouses] = useState([])
+    const warehouses = useSelector(selectListWhss)
+    // const [zones, setZones] = useState([])
+    const zones = useSelector(selectListZones)
     const [filterZ, setFilterZ] = useState([])
     const [suppliers, setSuppliers] = useState([])
     const [carriers, setCarriers] = useState([])
-    const [parts, setParts] = useState([])
+    // const [parts, setParts] = useState([])
+    const parts = useSelector(selectListParts)
     const [uoms, setUOMs] = useState([])
     const [filterP, setFilterP] = useState([])
     const [orderNumber, setOrderNumber] = useState([])
@@ -99,56 +107,24 @@ function Receipts() {
     }
 
     async function getOrderId() {
-        let query = await db.collection('receipts').orderBy('orderId', 'desc').limit(1).get();
-        let snapshot = query.docs[0].data();
-        let data = snapshot;
-        console.log("New order id:", data.orderId + 1)
-        return data.orderId + 1;
+        let query = await db.collection('orders').orderBy('orderId', 'desc').limit(1).get();
+        let snapshot = 1
+        if (query.docs[0]) {
+            snapshot = query.docs[0]?.data()
+            return snapshot?.orderId + 1;
+        }
+        else {
+            return 1
+        }
+
+        //let data = snapshot;
+        // console.log("New order id:", data.orderId + 1)
     }
 
 
 
     useEffect(() => {
-        // getDoc()
-        db.collection("clients")
-            .orderBy('clientName', 'asc')
-            .get()
-            .then(snapshot =>
-                setClients(
-                    snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                ))
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-        db.collection("warehouses")
-            .orderBy('whsName', 'asc')
-            .get()
-            .then(snapshot =>
-                setWarehouses(
-                    snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                ))
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-        db.collection("zones")
-            .orderBy('zoneName', 'asc')
-            .get()
-            .then(snapshot =>
-                setZones(
-                    snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                ))
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
+
         db.collection("suppliers")
             .orderBy('name', 'asc')
             .get()
@@ -167,19 +143,6 @@ function Receipts() {
             .get()
             .then(snapshot =>
                 setCarriers(
-                    snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                ))
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-        db.collection("parts")
-            .orderBy('partName', 'asc')
-            .get()
-            .then(snapshot =>
-                setParts(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         data: doc.data(),
@@ -230,10 +193,10 @@ function Receipts() {
         const newOrderId = getOrderId().then((orden) => {
             docRef.get().then((doc) => {
                 whsName = doc.data().whsName
-                db.collection('receipts').add({
+                db.collection('orders').add({
                     orderId: orden,
                     warehouse: whsName,
-                    zone: formData.zona,
+                    recZone: formData.zona,
                     client: clientName,
                     carrier: formData.carrier,
                     supplier: formData.proveedor,
@@ -245,10 +208,13 @@ function Receipts() {
                     uomq: formData.uomq,
                     weight: formData.peso,
                     uomw: formData.uomp,
-                    notes: formData.notas,
+                    recNotes: formData.notas,
+                    orderStatus: "Received",
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     recTimestamp: d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
-                    user: user?.email,
+                    recUser: user?.email,
+                    orderActive: true,
+                    recActive: true,
                 })
                     .then((docRef) => {
                         handleOpen()
@@ -257,7 +223,7 @@ function Receipts() {
                             id: docRef.id,
                             orderId: orden,
                             warehouse: whsName,
-                            zone: formData.zona,
+                            recZone: formData.zona,
                             client: clientName,
                             carrier: formData.carrier,
                             supplier: formData.proveedor,
@@ -269,10 +235,13 @@ function Receipts() {
                             uomq: formData.uomq,
                             weight: formData.peso,
                             uomw: formData.uomp,
-                            notes: formData.notas,
+                            recNotes: formData.notas,
+                            orderStatus: "Received",
                             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                             recTimestamp: d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
-                            user: user?.email,
+                            recUser: user?.email,
+                            orderActive: true,
+                            recActive: true,
                         }))
                         //dispatch(saveReceipt())
                         // console.log("Document written with ID: ", docRef.id);
