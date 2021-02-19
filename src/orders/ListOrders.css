@@ -1,0 +1,34 @@
+.listOrders {
+    background-color: #202940;
+    /* color: lightgray; */
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+}
+
+
+.PrivateSwitchBase-input-4, .MuiIconButton-label, 
+ .MuiDataGrid-root,.MuiDataGrid-main{
+    color:grey ;
+    border-color: transparent !important;
+}
+
+.MuiDataGrid-row.Mui-even {
+    border:none;
+}
+
+.MuiTablePagination-root, .MuiTablePagination-caption, .MuiIconButton-label{
+    color:greenyellow !important;
+}
+.MuiDataGrid-root, .MuiDataGrid-columnsContainer, .MuiDataGrid-cell {
+    border:none !important;
+    color:white !important;
+}
+ .MuiDataGrid-cell {
+    /* border:none !important; */
+    color:grey !important;
+}
+/* .MuiButtonBase-root, .MuiIconButton-root, .MuiIconButton-label, .MuiIconButton-colorInherit ,.Mui-disabled ,.Mui-disabled { */
+    .MuiIconButton-label {
+    color:white !important;
+}

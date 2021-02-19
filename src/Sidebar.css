@@ -7,6 +7,7 @@
 
 .sidebar__top {
     display:flex;
+    /* justify-content: space-between; */
     /* justify-content: center; */
     align-items: center;
     padding: 15px;
@@ -19,7 +20,7 @@
     height: 60px;
     margin-left: 5px;
     align-items: center;
-    margin-left: auto;
+    /* margin-left: auto; */
     margin-right: 10px;
     display: block;
 }

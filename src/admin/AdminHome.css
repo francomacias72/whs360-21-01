@@ -1,0 +1,50 @@
+.adminHome{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    margin-left:20px;
+    background-color: #202940;
+    margin-top: 5px;
+}
+.adminHome > h1 {
+    text-align: center;
+    color:white;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.adminHomeOption  {
+    /* margin-left: 45%;     */
+    text-align: center;
+    color: lightblue;
+    font-size: larger;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.adminHomeOption p {
+    margin-left: 10px;
+}
+.adminHomeOption > p:hover, .adminOption:hover {
+    font-weight: bolder;
+    cursor: grab;
+}
+.adminOption{
+    display:flex;
+    /* justify-content: left; */
+    width: 300px;
+}
+.optionIcon{
+    color:white;
+    border-radius: 15%;
+    padding: 10px;
+    width:  20px;
+    cursor: pointer;
+}
+.backColorGreen{
+    background-color: #4caf50;
+}
+.backColorOrange{
+    background-color: orange;
+}

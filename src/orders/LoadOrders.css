@@ -1,0 +1,36 @@
+.loadOrders {
+  border: 1px solid grey;
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: #202940;
+  padding-bottom: 20px;
+}
+.loadOrdersHeader > h1{
+  color:white;
+  text-align: center;
+}
+.loadOrdersMiddle {
+  display:flex;
+  justify-content: center;
+}
+.loadOrdersMiddle > label, .loadOrdersMiddle>button {
+  margin: 10px;
+}
+.loadOrdersFilters{
+  display:flex;
+  justify-content: center;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color:white;
+}
+
+.file-preview {
+  margin: 0 10px;
+}

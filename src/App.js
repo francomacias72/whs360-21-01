@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+// import ReactDOM from 'react-dom'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -28,6 +29,10 @@ import Etiqueta from './Etiqueta';
 import { login, selectUser } from './features/userSlice';
 import Login from './Login'
 import Dashboard from './components/Dashboard';
+import ListOrders from './orders/ListOrders';
+import Table from './orders/Table';
+import LoadOrders from './orders/LoadOrders';
+import AdminHome from './admin/AdminHome';
 
 
 function App() {
@@ -54,19 +59,6 @@ function App() {
       .catch((error) => {
         console.log("Error getting clients: ", error);
       })
-    // db.collection('clients')
-    //   .orderBy('clientName', 'asc')
-    //   .onSnapshot(snapshot =>
-    //     setClients(
-    //       snapshot.docs.map(doc => ({
-    //         id: doc.id,
-    //         data: doc.data(),
-    //       }))
-    //     )
-    //   )
-    // console.log("Clients APP: ", clients)
-    // dispatch(fillListClients(clients))
-    //*********************************** */
     auth.onAuthStateChanged(user => {
       if (user) {
         //the user is logged in
@@ -89,15 +81,20 @@ function App() {
       ) : (
           <div className="app">
             <Sidebar />
-
             <div className="app__body">
               <Header />
               <Switch>
+                <Route path="/loadorders">
+                  <LoadOrders />
+                </Route>
+                <Route path="/orders">
+                  <ListOrders />
+                </Route>
                 <Route path="/dashboard">
                   <Dashboard />
                 </Route>
-                <Route path="/client">
-                  <ClientPart />
+                <Route path="/admin">
+                  <AdminHome />
                 </Route>
                 <Route path="/clientes">
                   <ClientPart />
@@ -128,3 +125,5 @@ function App() {
 }
 
 export default App;
+
+// ReactDOM.render(<Table />, document.getElementById('react-div'));

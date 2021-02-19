@@ -1,0 +1,58 @@
+.dashboard {
+    margin-top: 5px;
+    /* border: 1px solid white; */
+}
+.dashboard > h1{
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+.dashboardRow {
+    display:flex;
+    justify-content: space-between;
+}
+
+.dashboardBox {
+    margin: 10px;
+    margin-right: 0;
+    color: white;
+    width: 18vw;
+    height: 22vh;
+    border: 1px solid grey;
+    background-color: #202940;
+
+}
+.dashboardBox > h3 {
+    color: lightgray;
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 20px;
+}
+.mainNumber {
+    color:yellow;
+    text-align: center;
+    font-size: x-large;
+}
+.secondaryNumber {
+    color: cyan;
+    font-weight: bolder;
+}
+
+.dashboardBox > .boxRow {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-left: 30px; */
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.boxRow > p{
+    margin-right: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color:white;
+}
+.boxRow > a{
+    color: greenyellow;
+}

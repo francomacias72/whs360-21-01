@@ -5,6 +5,7 @@ export const whsSlice = createSlice({
     initialState: {
         listWhss: null,
         selectedWhs: null,
+        selectedWhsMain: null,
         createWhsIsOpen: false,
         editMode: false,
     },
@@ -14,6 +15,9 @@ export const whsSlice = createSlice({
         },
         selectWhs: (state, action) => {
             state.selectedWhs = action.payload
+        },
+        selectWhsMain: (state, action) => {
+            state.selectedWhsMain = action.payload
         },
         changeToEditW: (state) => {
             state.editMode = true;
@@ -33,6 +37,7 @@ export const whsSlice = createSlice({
 export const {
     fillListWhss,
     selectWhs,
+    selectWhsMain,
     changeToEditW,
     changeToAddW,
     openCreateWhs,
@@ -41,6 +46,7 @@ export const {
 
 export const selectListWhss = (state) => state.whs.listWhss
 export const selectOpenWhs = (state) => state.whs.selectedWhs
+export const selectOpenWhsMain = (state) => state.whs.selectedWhsMain
 export const selectEditMode = state => state.whs.editMode
 export const selectCreateWhsIsOpen = (state) => state.whs.createWhsIsOpen
 

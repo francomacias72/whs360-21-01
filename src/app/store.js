@@ -5,6 +5,9 @@ import whsReducer from '../features/whsSlice';
 import zoneReducer from '../features/zoneSlice';
 import receiptReducer from '../features/receiptSlice';
 import userReducer from '../features/userSlice';
+import carrierReducer from '../features/carrierSlice';
+import supplierReducer from '../features/supplierSlice';
+import uomReducer from '../features/uomSlice';
 
 
 export default configureStore({
@@ -15,5 +18,8 @@ export default configureStore({
         zone: zoneReducer,
         receipt: receiptReducer,
         user: userReducer,
+        carrier: carrierReducer,
+        supplier: supplierReducer,
+        uom: uomReducer,
     },
 });

@@ -1,0 +1,204 @@
+.receipts {
+    /* border: 1px solid white; */
+    width: 80vw;
+    padding: 0;
+    margin-left:20px;
+    background-color: #202940;
+    margin-top: 60px;
+    box-shadow: 0px 5px 7px 0 rgba(0,0,0,0.24);
+}
+
+.receipts > .header {
+    /* border: 1px solid yellow; */
+    text-align: center;
+    color: #8B928E !important;
+    justify-content: center;
+    border-bottom: 2px solid grey;
+}
+
+.receipts > .header > h1 {
+    /* border: 1px solid green; */
+    color: white !important;
+    text-align: center;
+}
+
+.container {
+    color: #8B928E !important;
+    margin-top: 20px;
+    /* border: 1px solid blue; */
+}
+.containerHeader{
+    display:flex;
+    justify-content: space-between;
+}
+
+.container2 {
+    display: flex;
+    justify-content: space-between;
+    color: #8B928E;
+
+}
+
+.receipts > .container> .col1, .col2, .col3 {
+    margin-bottom: 10px;
+    width: 20vw;
+}
+
+.receipts > .container > .container2> .col1, .col2, .col3 {
+    margin-bottom: 10px;
+    width: 25vw;
+}
+
+.receipts > .container > .containerHeader> .col1, .col2, .col3{
+    width: 35vw;
+    margin: 0;
+}
+
+.col1, .col2, .col3 {
+    padding-left: 10px;
+}
+
+
+.combo {
+    display:flex;
+    /* justify-content: space-between; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.details {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    display:flex;
+    /* justify-content: space-between; */
+}
+
+.detCol1, .detCol2 {
+    width: 25vw;
+    text-align: center;
+}
+.detCol2 {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    width: 50vw;
+}
+
+.izq, .der {
+    display: flex;
+    align-items:center;
+    /* width: 50%; */
+    /* justify-content: space-between; */
+}
+.izq > p {
+    text-align: right;
+    width: 100px;
+    margin-right: 10px;
+}
+.der {
+    /* margin-left: 20px; */
+}
+
+select {
+    margin:0;
+    height: 2rem;
+    padding-left: 10px;
+
+}
+
+select option:first-child {
+    color: grey !important;
+} 
+
+.formFooter {
+    /* display:flex;
+    justify-content: center;
+    width: 10rem;
+    margin:0; */
+}
+.createReceiptSend {
+    width: 100px !important;
+}
+
+.createReceipt {
+    background-color: #25cc88 !important;
+    color: white !important;
+    text-transform: capitalize !important;
+    margin: 15px !important;
+    font-weight: bolder !important;
+    justify-self: end !important;
+}
+
+.izq > input{
+    margin-left: 10px;
+    height: 2rem;
+    border: 2px solid red ;
+    background-color: transparent;
+    color: white !important;
+    padding-left: 10px;
+    width: 9rem;
+}
+
+.izq > select, .der > select, .combo > select, .col2 > select, .checkError>select {
+    margin-left: 10px;
+    /* border: 2px solid #25cc88 ; */
+    border: 2px solid red ;
+    background-color: transparent;
+    color: white !important;
+    width: 10rem;
+}
+.der > select {
+    width: 5rem !important;
+    height: 2rem !important;
+    padding-left: 0 !important;
+}
+textarea {
+    height: 2rem;
+    border: 2px solid #25cc88 !important;
+    background-color: transparent;
+    color: white !important;
+    width: 30vw;
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 12vh;
+}
+.receipts > .header {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+input:focus {
+    border: 2px solid #25cc88 !important;
+    background-color: #3b4561;
+}
+
+option {
+    color: black;
+}
+
+option:first-child{
+    /* color: red !important; */
+}
+
+.borderGreen {
+    border: 2px solid #25cc88 !important;
+}
+
+textarea::placeholder, input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(108, 113, 153);
+    font-style:italic;
+    opacity: 1; /* Firefox */
+}
+
+ .opcional{
+    border: 2px solid #25cc88 !important;
+ }
+
+ input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

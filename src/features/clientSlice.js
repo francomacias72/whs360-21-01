@@ -5,6 +5,7 @@ export const clientSlice = createSlice({
     initialState: {
         listClients: null,
         selectedClient: null,
+        selectedClientMain: null,
         createClientIsOpen: false,
         editMode: false,
     },
@@ -14,6 +15,9 @@ export const clientSlice = createSlice({
         },
         selectClient: (state, action) => {
             state.selectedClient = action.payload
+        },
+        selectClientMain: (state, action) => {
+            state.selectedClientMain = action.payload
         },
         changeToEdit: (state) => {
             state.editMode = true;
@@ -33,6 +37,7 @@ export const clientSlice = createSlice({
 export const {
     fillListClients,
     selectClient,
+    selectClientMain,
     changeToEdit,
     changeToAdd,
     openCreateClient,
@@ -40,6 +45,7 @@ export const {
 } = clientSlice.actions;
 
 export const selectListClients = (state) => state.client.listClients
+export const selectOpenClientMain = (state) => state.client.selectedClientMain
 export const selectOpenClient = (state) => state.client.selectedClient
 export const selectEditMode = state => state.client.editMode
 export const selectCreateClientIsOpen = (state) => state.client.createClientIsOpen

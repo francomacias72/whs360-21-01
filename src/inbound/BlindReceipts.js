@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Receipts() {
+function BlindReceipts() {
     const history = useHistory()
     // const [clients, setClients] = useState([])
     const clients = useSelector(selectListClients)
@@ -489,6 +489,4 @@ function Receipts() {
 
     )
 }
-
-
-export default Receipts
+export default BlindReceipts
