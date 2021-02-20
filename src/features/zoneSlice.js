@@ -5,6 +5,7 @@ export const zoneSlice = createSlice({
     initialState: {
         listZones: null,
         selectedZone: null,
+        selectedZoneMain: null,
         createZoneIsOpen: false,
         editModeZ: false,
     },
@@ -14,6 +15,9 @@ export const zoneSlice = createSlice({
         },
         selectZone: (state, action) => {
             state.selectedZone = action.payload
+        },
+        selectZoneMain: (state, action) => {
+            state.selectedZoneMain = action.payload
         },
         changeToEditZ: (state) => {
             state.editModeZ = true;
@@ -33,6 +37,7 @@ export const zoneSlice = createSlice({
 export const {
     fillListZones,
     selectZone,
+    selectZoneMain,
     changeToEditZ,
     changeToAddZ,
     openCreateZone,
@@ -41,6 +46,7 @@ export const {
 
 export const selectListZones = (state) => state.zone.listZones
 export const selectOpenZone = (state) => state.zone.selectedZone
+export const selectOpenZoneMain = (state) => state.zone.selectedZoneMain
 export const selectEditModeZ = state => state.zone.editModeZ
 export const selectCreateZoneIsOpen = (state) => state.zone.createZoneIsOpen
 

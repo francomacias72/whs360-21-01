@@ -10,8 +10,8 @@ import { selectOpenClient, selectListClients, fillListClients, selectClientMain 
 import { db } from './firebase';
 import { openCreatePart, changeToAddP, fillListParts, selectListParts } from './features/partSlice'
 import { auth } from './firebase'
-import { fillListWhss, selectWhsMain } from './features/whsSlice';
-import { fillListZones } from './features/zoneSlice';
+import { fillListWhss, selectWhs, selectWhsMain } from './features/whsSlice';
+import { fillListZones, selectZone, selectZoneMain } from './features/zoneSlice';
 import { fillListCarriers } from './features/carrierSlice';
 import { fillListSuppliers } from './features/supplierSlice';
 import { fillListUoms } from './features/uomSlice';
@@ -20,9 +20,9 @@ import { fillListUoms } from './features/uomSlice';
 function Header() {
     const user = useSelector(selectUser)
     const dispatch = useDispatch()
-    const [filterZ, setFilterZ] = useState([])
-    const [filterP, setFilterP] = useState([])
-    const selectedClient = useSelector(selectOpenClient)
+    // const [filterZ, setFilterZ] = useState([])
+    // const [filterP, setFilterP] = useState([])
+    // const selectedClient = useSelector(selectOpenClient)
     const [clients, setClients] = useState([])
     const [parts, setParts] = useState([])
     const [warehouses, setWarehouses] = useState([])
@@ -115,12 +115,19 @@ function Header() {
     dispatch(fillListUoms(uoms))
 
     function bodegaChange(e) {
-        setFilterZ(e.target.value)
+        // setFilterZ(e.target.value)
         selectChange(e)
         dispatch(selectWhsMain(e.target.value))
+        // dispatch(selectWhs())
     }
+    // function zoneChange(e) {
+    //     setFilterZ(e.target.value)
+    //     selectChange(e)
+    //     dispatch(selectZoneMain(e.target.value))
+    //     dispatch(selectZone())
+    // }
     function clientChange(e) {
-        setFilterP(e.target.value)
+        // setFilterP(e.target.value)
         selectChange(e)
         dispatch(selectClientMain(e.target.value))
     }
@@ -138,7 +145,7 @@ function Header() {
     return (
         <div className='header'>
             <div className="headerTitle">
-                {/* <div className="combo">
+                <div className="combo">
                     <div className="checkError">
                         <select id="selectBodega" name="bodega" onChange={bodegaChange}>
                             <option value="" disabled selected > Elegir Bodega</option>
@@ -150,16 +157,16 @@ function Header() {
                         </select>
                     </div>
                 </div>
-                <div className="combo">
+                {/* <div className="combo">
                     <select id="selectZona" name="zona" onChange={selectChange}>
-                        <option value="" disabled selected > Elegir Locación</option>
+                        <option value="" disabled selected > Elegir Zona</option>
                         <option value="" > All </option>
                         {zones.filter(c => c.data.whsId.includes(filterZ)).map(({ id, data: { zoneName, }
                         }) => (
                             <option value={zoneName}>{zoneName.substr(0, 25)}</option>
                         ))}
                     </select>
-                </div>
+                </div> */}
                 <div className="combo">
                     <select id="selectCliente" name="cliente" onChange={clientChange}>
                         <option value="" disabled selected > Elegir Cliente</option>
@@ -169,7 +176,7 @@ function Header() {
                             <option value={id}>{clientName.substr(0, 25) + "..."}</option>
                         ))}                    </select>
                 </div>
-                <div className="combo">
+                {/* <div className="combo">
                     <select id="selectParte" onChange={selectChange}
                         name="parte"
                     // ref={register({ required: true })}

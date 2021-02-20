@@ -14,10 +14,10 @@ import { selectUser } from './features/userSlice'
 import { useBarcode } from 'react-barcodes';
 import { jsPDF } from 'jspdf'
 import 'svg2pdf.js'
-import { selectListClients } from './features/clientSlice'
+import { selectListClients, selectOpenClientMain } from './features/clientSlice'
 import { selectListParts } from './features/partSlice'
-import { selectListWhss } from './features/whsSlice'
-import { selectListZones } from './features/zoneSlice'
+import { selectListWhss, selectOpenWhsMain } from './features/whsSlice'
+import { selectListZones, selectOpenZone } from './features/zoneSlice'
 import { selectListCarriers } from './features/carrierSlice'
 import { selectListSuppliers } from './features/supplierSlice'
 import { selectListUoms } from './features/uomSlice'
@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Receipts() {
+    const whsMain = useSelector(selectOpenWhsMain)
+    const clientMain = useSelector(selectOpenClientMain)
+    const zoneMain = useSelector(selectOpenZone)
     const history = useHistory()
     // const [clients, setClients] = useState([])
     const clients = useSelector(selectListClients)
@@ -121,54 +124,12 @@ function Receipts() {
         else {
             return 1
         }
-
-        //let data = snapshot;
-        // console.log("New order id:", data.orderId + 1)
     }
 
 
 
     useEffect(() => {
 
-        // db.collection("suppliers")
-        //     .orderBy('name', 'asc')
-        //     .get()
-        //     .then(snapshot =>
-        //         setSuppliers(
-        //             snapshot.docs.map(doc => ({
-        //                 id: doc.id,
-        //                 data: doc.data(),
-        //             }))
-        //         ))
-        //     .catch((error) => {
-        //         console.log("Error getting documents: ", error);
-        //     });
-        // db.collection("carriers")
-        //     .orderBy('name', 'asc')
-        //     .get()
-        //     .then(snapshot =>
-        //         setCarriers(
-        //             snapshot.docs.map(doc => ({
-        //                 id: doc.id,
-        //                 data: doc.data(),
-        //             }))
-        //         ))
-        //     .catch((error) => {
-        //         console.log("Error getting documents: ", error);
-        //     });
-        // db.collection("uoms")
-        //     .orderBy('name', 'asc')
-        //     .get()
-        //     .then(snapshot =>
-        //         setUOMs(
-        //             snapshot.docs.map(doc => ({
-        //                 id: doc.id,
-        //                 data: doc.data(),
-        //             }))
-        //         ))
-        //     .catch((error) => {
-        //         console.log("Error getting documents: ", error);
-        //     });
     }, [])
 
     function bodegaChange(e) {
@@ -272,14 +233,15 @@ function Receipts() {
             <form className="container" onSubmit={handleSubmit(onSubmit)}>
                 <div className="containerHeader">
                     <div className="col1" >
-                        <div className="combo">
+                        {/* <div className="combo">
                             <div className="izq">
                                 <p>Bodega</p>
-                                <div className="checkError">
-                                    <select id="selectBodega" onChange={bodegaChange}
+                                <div className={whsMain ? "checkError greenBorder" : "checkError"}>
+                                    <select id="selectBodega2" onChange={bodegaChange} onClick={selectChange}
+                                        onFocus={selectChange}
                                         ref={register({ required: true })}
                                         name="bodega"
-                                    >
+                                        value={whsMain ? whsMain : ''}                                    >
                                         <option value="" disabled selected > Elegir Bodega</option>
                                         {warehouses.map(({ id, data: { whsName, }
                                         }) => (
@@ -287,20 +249,21 @@ function Receipts() {
                                         ))}
                                     </select>
                                     {/* {errors.bodega && <p className="createClient__error">Campo Requerido...</p>} */}
-                                </div>
+                        {/* </div>
                             </div>
                             <div className="der">
                             </div>
-                        </div>
+                        </div> */}
                         <div className="combo">
                             <div className="izq">
                                 <p>Zona</p>
                                 <select id="selectZona" onChange={selectChange}
                                     ref={register({ required: true })}
                                     name="zona"
+                                // value={zoneMain ? zoneMain : ''}
                                 >
-                                    <option value="" disabled selected > Elegir Locación</option>
-                                    {zones.filter(c => c.data.whsId.includes(filterZ)).map(({ id, data: { zoneName, }
+                                    <option value="" disabled selected > Elegir Zona</option>
+                                    {zones.filter(c => c.data.whsId.includes(whsMain)).map(({ id, data: { zoneName, }
                                     }) => (
                                         <option value={zoneName}>{zoneName.substr(0, 25)}</option>
                                     ))}
@@ -309,12 +272,13 @@ function Receipts() {
                         </div>
                     </div>
                     <div className="col2">
-                        <div className="combo">
+                        {/* <div className="combo">
                             <div className="izq">
                                 <p>Cliente</p>
-                                <select id="selectCliente" onChange={clientChange}
+                                <select id="selectCliente2" onChange={clientChange}
                                     name="cliente"
                                     ref={register({ required: true })}
+                                    value={clientMain ? clientMain : ''}
                                 >
                                     <option value="" disabled selected > Elegir Cliente</option>
                                     {clients.map(({ id, data: { clientName, }
@@ -325,13 +289,14 @@ function Receipts() {
                             </div>
                             <div className="der">
                             </div>
-                        </div>
+                        </div> */}
                         <div className="combo">
                             <div className="izq">
                                 <p>Client Ref.</p>
                                 <input type="text" placeholder="No de Referencia" className="opcional"
                                     name="cr"
                                     ref={register({ required: false })}
+                                    value=''
                                 />
                             </div>
                         </div>
@@ -400,7 +365,7 @@ function Receipts() {
                                 ref={register({ required: true })}
                             >
                                 <option value="" disabled selected > Elegir Parte</option>
-                                {parts.filter(c => c.data.clientId.includes(filterP)).map(({ id, data: { partName, }
+                                {parts.filter(c => c.data.clientId.includes(clientMain)).map(({ id, data: { partName, }
                                 }) => (
                                     <option value={partName}>{partName?.substr(0, 25)}</option>
                                 ))}
