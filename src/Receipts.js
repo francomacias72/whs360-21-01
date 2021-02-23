@@ -233,30 +233,8 @@ function Receipts() {
             <form className="container" onSubmit={handleSubmit(onSubmit)}>
                 <div className="containerHeader">
                     <div className="col1" >
-                        {/* <div className="combo">
-                            <div className="izq">
-                                <p>Bodega</p>
-                                <div className={whsMain ? "checkError greenBorder" : "checkError"}>
-                                    <select id="selectBodega2" onChange={bodegaChange} onClick={selectChange}
-                                        onFocus={selectChange}
-                                        ref={register({ required: true })}
-                                        name="bodega"
-                                        value={whsMain ? whsMain : ''}                                    >
-                                        <option value="" disabled selected > Elegir Bodega</option>
-                                        {warehouses.map(({ id, data: { whsName, }
-                                        }) => (
-                                            <option value={id}>{whsName.substr(0, 25)}</option>
-                                        ))}
-                                    </select>
-                                    {/* {errors.bodega && <p className="createClient__error">Campo Requerido...</p>} */}
-                        {/* </div>
-                            </div>
-                            <div className="der">
-                            </div>
-                        </div> */}
                         <div className="combo">
                             <div className="izq">
-                                <p>Zona</p>
                                 <select id="selectZona" onChange={selectChange}
                                     ref={register({ required: true })}
                                     name="zona"
@@ -270,30 +248,9 @@ function Receipts() {
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div className="col2">
-                        {/* <div className="combo">
-                            <div className="izq">
-                                <p>Cliente</p>
-                                <select id="selectCliente2" onChange={clientChange}
-                                    name="cliente"
-                                    ref={register({ required: true })}
-                                    value={clientMain ? clientMain : ''}
-                                >
-                                    <option value="" disabled selected > Elegir Cliente</option>
-                                    {clients.map(({ id, data: { clientName, }
-                                    }) => (
-                                        <option value={id}>{clientName.substr(0, 25) + "..."}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="der">
-                            </div>
-                        </div> */}
                         <div className="combo">
                             <div className="izq">
-                                <p>Client Ref.</p>
-                                <input type="text" placeholder="No de Referencia" className="opcional"
+                                <input type="text" placeholder="No de Ref del Cliente" className="opcional"
                                     name="cr"
                                     ref={register({ required: false })}
                                     value=''
@@ -304,7 +261,7 @@ function Receipts() {
                     <div className="col2">
                         <div className="combo">
                             <div className="izq">
-                                <p>Proveedor</p>
+                                {/* <p>Proveedor</p> */}
                                 <select id="selectProveedor" onChange={selectChange}
                                     ref={register({ required: true })}
                                     name="proveedor"
@@ -319,7 +276,7 @@ function Receipts() {
                         </div>
                         <div className="combo">
                             <div className="izq">
-                                <p>PO Number</p>
+                                {/* <p>PO Number</p> */}
                                 <input type="text" placeholder="No de PO" className="opcional"
                                     name="po"
                                     ref={register({ required: false })}
@@ -327,32 +284,35 @@ function Receipts() {
                             </div>
                         </div>
                     </div>
-                    <div className="col3">
+                    <div className="col2">
                         <div className="combo">
-                            <div className="izq">
-                                <p>Carrier Level</p>
-                                <select id="selectCarrier" onChange={selectChange}
-                                    name="carrier"
-                                    ref={register({ required: true })}
-                                >
-                                    <option value="" disabled selected > Elegir Carrier</option>
-                                    {carriers.map(({ id, data: { name, }
-                                    }) => (
-                                        <option value={name}>{name?.substr(0, 25)}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="der">
-                            </div>
+                            <select id="selectCarrier" onChange={selectChange}
+                                name="carrier"
+                                ref={register({ required: true })}
+                            >
+                                <option value="" disabled selected > Elegir Carrier</option>
+                                {carriers.map(({ id, data: { name, }
+                                }) => (
+                                    <option value={name}>{name?.substr(0, 25)}</option>
+                                ))}
+                            </select>
+
                         </div>
                         <div className="combo">
                             <div className="izq">
-                                <p>Bill of Lading</p>
+                                {/* <p>Bill of Lading</p> */}
                                 <input type="text" placeholder="123abc" className="opcional"
                                     name="bill"
                                     ref={register({ required: false })}
                                 />
                             </div>
+                        </div>
+                    </div>
+                    <div className="col3">
+                        <div className="combo">
+                            <textarea placeholder="Notas opcionales" name="notas" id="" cols="30" rows="10"
+                                ref={register({ required: false })}
+                            ></textarea>
                         </div>
                     </div>
                 </div>
@@ -427,10 +387,7 @@ function Receipts() {
                         </div>
                     </div>
                     <div className="detCol2">
-                        <h3>Notas</h3>
-                        <textarea placeholder="Notas opcionales" name="notas" id="" cols="30" rows="10"
-                            ref={register({ required: false })}
-                        ></textarea>
+
                     </div>
                 </div>
                 <div className="createClient__options" style={{ justifyContent: "flex-end", marginRight: "50px" }}>

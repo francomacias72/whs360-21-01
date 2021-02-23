@@ -39,26 +39,6 @@
 
 }
 
-.receipts > .container> .col1, .col2, .col3 {
-    margin-bottom: 10px;
-    width: 20vw;
-}
-
-.receipts > .container > .container2> .col1, .col2, .col3 {
-    margin-bottom: 10px;
-    width: 25vw;
-}
-
-.receipts > .container > .containerHeader> .col1, .col2, .col3{
-    width: 35vw;
-    margin: 0;
-}
-
-.col1, .col2, .col3 {
-    padding-left: 10px;
-}
-
-
 .combo {
     display:flex;
     /* justify-content: space-between; */
@@ -90,16 +70,7 @@
 .izq, .der {
     display: flex;
     align-items:center;
-    /* width: 50%; */
-    /* justify-content: space-between; */
-}
-.izq > p {
-    text-align: right;
-    width: 100px;
-    margin-right: 10px;
-}
-.der {
-    /* margin-left: 20px; */
+    /* width: 100%; */
 }
 
 select {
@@ -113,12 +84,6 @@ select option:first-child {
     color: grey !important;
 } 
 
-.formFooter {
-    /* display:flex;
-    justify-content: center;
-    width: 10rem;
-    margin:0; */
-}
 .createReceiptSend {
     width: 100px !important;
 }
@@ -160,7 +125,7 @@ textarea {
     border: 2px solid #25cc88 !important;
     background-color: transparent;
     color: white !important;
-    width: 30vw;
+    width: 100%;
     padding-left: 10px;
     padding-top: 10px;
     height: 12vh;
@@ -201,4 +166,25 @@ textarea::placeholder, input::placeholder { /* Chrome, Firefox, Opera, Safari 10
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.col1, .col2 {
+    width: 22vw !important;
+    margin-bottom: 10px;
+    min-width: 10rem;
+    padding-left: 10px;
+}
+.col3 {
+    width: 34vw !important;
+    margin-bottom: 10px;
+    min-width: 10rem;
+    padding-left: 10px;
+    margin-right: 20px;
+}
+.combo, .izq, .der, .izq > select, .der > select, .izq>input, .izq>textarea, .der>textarea{
+    width:100%  !important;
+    min-width: 10rem;
+}
+.combo>select {
+    width: 100% !important;
 }

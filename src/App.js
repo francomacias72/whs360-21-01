@@ -24,7 +24,7 @@ import WhsZone from './WhsZone';
 import ClientPart from './ClientPart';
 import AddEditWhs from './AddEditWhs';
 import AddEditZone from './AddEditZone';
-import Receipts from './Receipts';
+import Receipts from './inbound/Receipts';
 import Etiqueta from './Etiqueta';
 import { login, selectUser } from './features/userSlice';
 import Login from './Login'

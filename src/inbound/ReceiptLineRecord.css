@@ -1,0 +1,19 @@
+.receiptLineRecord{
+    display:flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #1a2035;
+    border-left: 2px solid #1a2035;
+    border-right: 2px solid #1a2035;
+    padding: 0 10px;
+    /* background-color: #1a2035; */
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: left;
+    
+}
+.receiptLineRecord>p{
+    min-width: 10rem;
+    text-align: center;
+}

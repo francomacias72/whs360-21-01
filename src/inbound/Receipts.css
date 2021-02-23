@@ -4,7 +4,7 @@
     padding: 0;
     margin-left:20px;
     background-color: #202940;
-    margin-top: 60px;
+    /* margin-top: 5px; */
     box-shadow: 0px 5px 7px 0 rgba(0,0,0,0.24);
 }
 
@@ -14,6 +14,7 @@
     color: #8B928E !important;
     justify-content: center;
     border-bottom: 2px solid grey;
+    width: 80vw; 
 }
 
 .receipts > .header > h1 {
@@ -38,26 +39,6 @@
     color: #8B928E;
 
 }
-
-.receipts > .container> .col1, .col2, .col3 {
-    margin-bottom: 10px;
-    width: 20vw;
-}
-
-.receipts > .container > .container2> .col1, .col2, .col3 {
-    margin-bottom: 10px;
-    width: 25vw;
-}
-
-.receipts > .container > .containerHeader> .col1, .col2, .col3{
-    width: 35vw;
-    margin: 0;
-}
-
-.col1, .col2, .col3 {
-    padding-left: 10px;
-}
-
 
 .combo {
     display:flex;
@@ -90,16 +71,7 @@
 .izq, .der {
     display: flex;
     align-items:center;
-    /* width: 50%; */
-    /* justify-content: space-between; */
-}
-.izq > p {
-    text-align: right;
-    width: 100px;
-    margin-right: 10px;
-}
-.der {
-    /* margin-left: 20px; */
+    /* width: 100%; */
 }
 
 select {
@@ -113,12 +85,6 @@ select option:first-child {
     color: grey !important;
 } 
 
-.formFooter {
-    /* display:flex;
-    justify-content: center;
-    width: 10rem;
-    margin:0; */
-}
 .createReceiptSend {
     width: 100px !important;
 }
@@ -131,8 +97,16 @@ select option:first-child {
     font-weight: bolder !important;
     justify-self: end !important;
 }
+.addLineButton {
+    background-color: #a53bb7 !important;
+    color: white !important;
+    text-transform: capitalize !important;
+    /* margin: 15px !important; */
+    font-weight: bolder !important;
+    justify-self: end !important;
+}
 
-.izq > input{
+.izq > input, .receiptLine > input{
     margin-left: 10px;
     height: 2rem;
     border: 2px solid red ;
@@ -142,7 +116,7 @@ select option:first-child {
     width: 9rem;
 }
 
-.izq > select, .der > select, .combo > select, .col2 > select, .checkError>select {
+.izq > select, .der > select, .combo > select, .col2 > select, .checkError>select, .receiptLine > select {
     margin-left: 10px;
     /* border: 2px solid #25cc88 ; */
     border: 2px solid red ;
@@ -155,12 +129,16 @@ select option:first-child {
     height: 2rem !important;
     padding-left: 0 !important;
 }
+
+#selectUOMqty, #selectUOMweight {
+    width: 6rem !important;
+}
 textarea {
-    height: 2rem;
+    height: 4rem !important;
     border: 2px solid #25cc88 !important;
     background-color: transparent;
     color: white !important;
-    width: 30vw;
+    width: 100%;
     padding-left: 10px;
     padding-top: 10px;
     height: 12vh;
@@ -201,4 +179,43 @@ textarea::placeholder, input::placeholder { /* Chrome, Firefox, Opera, Safari 10
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.col1, .col2 {
+    width: 22vw !important;
+    margin-bottom: 10px;
+    min-width: 10rem;
+    padding-left: 10px;
+}
+.col3 {
+    width: 34vw !important;
+    margin-bottom: 10px;
+    min-width: 10rem;
+    padding-left: 10px;
+    margin-right: 20px;
+}
+.combo, .izq, .der, .izq > select, .der > select, .izq>input, .izq>textarea, .der>textarea{
+    width:100%  !important;
+    min-width: 10rem;
+}
+.combo>select {
+    width: 100% !important;
+}
+.receiptLine{
+    margin: 10px !important;    
+}
+.recLinesHeader {
+    margin: 0px 20px;
+    /* background-color: #1a2035; */
+    padding: 0 10px; 
+    /* border-bottom: 1px solid grey; */
+    border: 2px solid #1a2035;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+}
+.recLinesHeader>p {
+    min-width: 10rem;
+    text-align: center;
+    color: white;
 }

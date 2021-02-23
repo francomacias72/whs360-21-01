@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function BlindReceipts() {
+function Receipts() {
     const whsMain = useSelector(selectOpenWhsMain)
     const clientMain = useSelector(selectOpenClientMain)
     const [receiptLines, setReceiptLines] = useState([])
@@ -533,4 +533,4 @@ function BlindReceipts() {
 }
 
 
-export default BlindReceipts
+export default Receipts
